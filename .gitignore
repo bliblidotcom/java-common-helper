@@ -1,0 +1,11 @@
+logs
+target
+bin
+.settings
+.classpath
+.project
+Server
+/target
+dependency-reduced-pom.xml
+.idea
+*.iml
