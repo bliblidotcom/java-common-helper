@@ -14,6 +14,53 @@ public class CollectionHelperTest {
   private Source source2;
 
   @Test
+  public void addToList_nullListAndNullElementArg_returnsNull() {
+    List<Source> list = null;
+    List<Source> result = CollectionHelper.addToList(list, null);
+    assertNull(result);
+  }
+
+  @Test
+  public void addToList_nullListAndNullElements_returnsNewEmptyArrayList() {
+    List<Source> list = null;
+    Source source1 = null;
+    Source source2 = null;
+    List<Source> result = CollectionHelper.addToList(list, source1, source2);
+    assertNotNull(result);
+    assertEquals(0, result.size());
+  }
+
+  @Test
+  public void addToList_nullListAndNonNullElements_returnsNewArrayListWithElements() {
+    List<Source> list = null;
+    Source source1 = new Source(1, 1.1, "one", SampleEnum.ENUM_ONE);
+    Source source2 = new Source();
+
+    List<Source> result = CollectionHelper.addToList(list, source1, source2);
+    assertNotNull(result);
+    assertEquals(2, result.size());
+    assertTrue(result.contains(source1));
+    assertTrue(result.contains(source2));
+  }
+
+  @Test
+  public void addToList_nonNullListAndNonNullElements_returnsListAppendedWithElements() {
+    Source source1 = new Source(1, 1.1, "one", SampleEnum.ENUM_ONE);
+    Source source2 = new Source();
+    Source source3 = new Source(3, 3.3, "three", SampleEnum.ENUM_THREE);
+
+    List<Source> list = new ArrayList<>();
+    list.add(source1);
+
+    List<Source> result = CollectionHelper.addToList(list, source2, source3);
+    assertNotNull(result);
+    assertEquals(3, result.size());
+    assertTrue(list.contains(source1));
+    assertTrue(list.contains(source2));
+    assertTrue(list.contains(source3));
+  }
+
+  @Test
   public void findInCollection_matchFound_returnsMatchingElement() {
     Set<Source> sources = new HashSet<>();
     sources.add(source1);

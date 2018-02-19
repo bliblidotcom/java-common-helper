@@ -51,6 +51,7 @@ public class CommonHelper {
    * @throws InstantiationException propagated exception, see {@link Class#newInstance()}
    * @throws IllegalAccessException propagated exception, see {@link Class#newInstance()}
    */
+  @Deprecated
   public static <T> T denullify(T t, Class<T> clazz) throws InstantiationException,
       IllegalAccessException {
     return t == null ? clazz.newInstance() : t;

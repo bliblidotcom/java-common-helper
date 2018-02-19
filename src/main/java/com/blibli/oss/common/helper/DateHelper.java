@@ -61,11 +61,13 @@ public class DateHelper {
   }
 
   /**
+   * Adds the specified amount of time to the given {@code date}.
    *
-   * @param date
-   * @param diff
-   * @param unit
-   * @return
+   * @param date to be added
+   * @param diff amount of difference, to be paired with {@code unit}
+   * @param unit of type {@link TimeUnit}
+   * @return new instance of {@link Date} with the added amount of time difference if the base
+   * {@code date} is not null, otherwise returns null
    */
   public static Date add(Date date, int diff, TimeUnit unit) {
     if (date != null) {
@@ -75,11 +77,13 @@ public class DateHelper {
   }
 
   /**
+   * Substracts the specified amount of time to the given {@code date}.
    *
-   * @param date
-   * @param diff
-   * @param unit
-   * @return
+   * @param date to be substracted
+   * @param diff amount of difference, to be paired with {@code unit}
+   * @param unit of type {@link TimeUnit}
+   * @return new instance of {@link Date} with the substracted amount of time difference if the base
+   * {@code date} is not null, otherwise returns null
    */
   public static Date minus(Date date, int diff, TimeUnit unit) {
     if (date != null) {
@@ -89,29 +93,37 @@ public class DateHelper {
   }
 
   /**
+   * Evaluates whether {@code firstDate} satisfies {@code comparator} when compared to {@code secondDate}.
    *
-   * @param startDate
-   * @param comparator
-   * @param endDate
-   * @return
+   * @param firstDate of type {@link Date}
+   * @param comparator of type {@link TimeComparator}
+   * @param secondDate of type {@link Date}
+   * @return true if {@code firstDate} satisfies {@code comparator} when compared to {@code secondDate}.
+   * <br>Returns false if one of the following is true:
+   * <ul>
+   *   <li>{@code firstDate} is null</li>
+   *   <li>{@code secondDate} is null</li>
+   *   <li>{@code comparator} is null</li>
+   *   <li>{@code firstDate} does not satisfy {@code comparator} when compared to {@code secondDate} </li>
+   * </ul>
    */
-  public static boolean is(Date startDate, TimeComparator comparator, Date endDate) {
-    if (startDate == null || endDate == null) {
+  public static boolean is(Date firstDate, TimeComparator comparator, Date secondDate) {
+    if (firstDate == null || secondDate == null) {
       return false;
     }
 
     if (TimeComparator.BEFORE.equals(comparator)) {
-      return startDate.before(endDate);
+      return firstDate.before(secondDate);
     } else if (TimeComparator.BEFORE_OR_EQUAL_TO.equals(comparator)) {
-      return startDate.before(endDate) || startDate.equals(endDate);
+      return firstDate.before(secondDate) || firstDate.equals(secondDate);
     } else if (TimeComparator.EQUAL_TO.equals(comparator)) {
-      return startDate.equals(endDate);
+      return firstDate.equals(secondDate);
     } else if (TimeComparator.NOT_EQUAL_TO.equals(comparator)) {
-      return !startDate.equals(endDate);
+      return !firstDate.equals(secondDate);
     } else if (TimeComparator.AFTER.equals(comparator)) {
-      return startDate.after(endDate);
+      return firstDate.after(secondDate);
     } else if (TimeComparator.AFTER_OR_EQUAL_TO.equals(comparator)) {
-      return startDate.after(endDate) || startDate.equals(endDate);
+      return firstDate.after(secondDate) || firstDate.equals(secondDate);
     } else {
       return false;
     }

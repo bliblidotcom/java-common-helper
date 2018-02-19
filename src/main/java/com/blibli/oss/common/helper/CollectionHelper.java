@@ -1,11 +1,7 @@
 package com.blibli.oss.common.helper;
 
-import org.apache.commons.lang3.StringUtils;
-
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Comparator;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
@@ -64,26 +60,6 @@ public class CollectionHelper {
   }
 
   /**
-   * Finds the first element that satisfies the given {@code func} in the collection.
-   *
-   * @param coll collection to be iterated
-   * @param t first operand for comparator
-   * @param comparator to evaluate operand {@code t} against elements in the collection {@code coll}
-   * @param <T> type of collection's content
-   * @return matching element. If coll is empty or no matching element is found, returns null
-   */
-  public static <T> T findInCollection(Collection<T> coll, T t, Comparator<T> comparator) {
-    if (isNotEmpty(coll)) {
-      for (T it : coll) {
-        if (comparator.compare(t, it) == 0) {
-          return it;
-        }
-      }
-    }
-    return null;
-  }
-
-  /**
    * Checks if {@code coll} is either null or empty
    *
    * @param coll collection to be checked, any implementing classes of {@link Collection}
@@ -101,17 +77,6 @@ public class CollectionHelper {
    */
   public static boolean isEmpty(Map<?, ?> map) {
     return map == null || map.isEmpty();
-  }
-
-  private static boolean isEmptyObject(Object obj) {
-    boolean isEmptyString = false;
-    if (obj != null) {
-      if (obj instanceof String) {
-        String str = (String) obj;
-        isEmptyString = StringUtils.isBlank(str) || str.equals("null");
-      }
-    }
-    return obj == null || isEmptyString;
   }
 
   /**
@@ -228,35 +193,6 @@ public class CollectionHelper {
    */
   public static int sizeOf(Collection<?> coll) {
     return isEmpty(coll) ? 0 : coll.size();
-  }
-
-
-  /**
-   *
-   * @param coll
-   * @param func
-   * @param <T>
-   * @param <R>
-   * @return
-   */
-  public static <T, R> List<R> streamToList(Collection<T> coll, Function<? super T, R> func) {
-    return isEmpty(coll) ? new ArrayList<>() : coll.stream().map(func).collect(Collectors.toList());
-  }
-
-  /**
-   *
-   * @param coll
-   * @param keyFunction
-   * @param valueFunction
-   * @param <S>
-   * @param <K>
-   * @param <V>
-   * @return
-   */
-  public static <S, K, V> Map<K, V> streamToMap(Collection<S> coll, Function<? super S, K> keyFunction,
-      Function<? super S, V> valueFunction) {
-    return isEmpty(coll) ? new HashMap<>() :
-        coll.stream().collect(Collectors.toMap(keyFunction, valueFunction));
   }
 
   /**

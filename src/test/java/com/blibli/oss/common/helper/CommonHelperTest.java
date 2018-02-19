@@ -163,6 +163,35 @@ public class CommonHelperTest {
   }
 
   @Test
+  public void denullifyWithSub_nullObjectAndSub_returnsNull() {
+    Source source = null;
+    Source sub1 = null;
+    Source sub2 = null;
+    Source result = denullify(source, sub1, sub2);
+    assertNull(result);
+  }
+
+  @Test
+  public void denullifyWithSub_nullObjectAndValidSub_returnsFirstNonNullSub() {
+    Source source = null;
+    Source sub1 = null;
+    Source sub2 = new Source(1, 1.1, "one", SampleEnum.ENUM_ONE);
+    Source result = denullify(source, sub1, sub2);
+    assertEquals(sub2, result);
+
+    result = denullify(source, new Source());
+    assertNotNull(result);
+  }
+
+  @Test
+  public void denullifyWithSub_nonNullObject_returnsThatObject() {
+    Source source = new Source(1, 1.1, "one", SampleEnum.ENUM_ONE);
+    Source sub2 = new Source(2, 2.2, "two", SampleEnum.ENUM_TWO);
+    Source result = denullify(source, sub2, new Source());
+    assertEquals(source, result);
+  }
+
+  @Test
   public void doIfNotNull_notNullInput_actionDone() {
     Source source = new Source();
     source.setIntField(11);
