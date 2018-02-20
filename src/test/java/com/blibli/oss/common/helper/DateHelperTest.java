@@ -7,6 +7,13 @@ import org.junit.Test;
 
 import java.util.Date;
 
+import static com.blibli.oss.common.helper.DateHelper.TimeUnit.DAYS;
+import static com.blibli.oss.common.helper.DateHelper.TimeUnit.HOURS;
+import static com.blibli.oss.common.helper.DateHelper.TimeUnit.MILLISECONDS;
+import static com.blibli.oss.common.helper.DateHelper.TimeUnit.MINUTES;
+import static com.blibli.oss.common.helper.DateHelper.TimeUnit.SECONDS;
+import static junit.framework.Assert.assertEquals;
+import static junit.framework.Assert.assertFalse;
 import static junit.framework.Assert.assertNotNull;
 import static junit.framework.Assert.assertNull;
 import static junit.framework.Assert.assertTrue;
@@ -14,6 +21,148 @@ import static junit.framework.Assert.assertTrue;
 public class DateHelperTest {
 
   private static final String VALID_DATE_FORMAT_PATTERN = "dd-MMM-yyyy";
+
+  private static final Date LESSER_DATE = new Date(1519130699000L);
+  private static final Date GREATER_DATE = new Date(1519131815000L);
+
+  @Test
+  public void add_nullDate_returnsNull() {
+    Date result = DateHelper.add(null, 10, DateHelper.TimeUnit.DAYS);
+    assertNull(result);
+  }
+
+  @Test
+  public void add_nullComparator_returnsDateAddedByDiffItself() {
+    long dateInMs = 1519130699000L;
+    Date date = new Date(dateInMs);
+
+    Date result = DateHelper.add(date, 10, null);
+    assertEquals(dateInMs + 10L, result.getTime());
+  }
+
+  @Test
+  public void add_validInputs_returnsDateAddedByDiffConvertedToMs() {
+    long dateInMs = 1519130699000L;
+    Date date = new Date(dateInMs);
+    long expectedDiffInMs = 2 * 24 * 60 * 60 * 1000;
+
+    Date result = DateHelper.add(date, 2, DateHelper.TimeUnit.DAYS);
+    assertEquals(dateInMs + expectedDiffInMs, result.getTime());
+  }
+
+  @Test
+  public void minus_nullDate_returnsNull() {
+    Date result = DateHelper.minus(null, 10, DateHelper.TimeUnit.DAYS);
+    assertNull(result);
+  }
+
+  @Test
+  public void minus_nullTimeUnit_returnsDateSubtractedByDiffItself() {
+    long dateInMs = 1519130699000L;
+    Date date = new Date(dateInMs);
+    Date result = DateHelper.minus(date, 10, null);
+    assertEquals(dateInMs - 10L, result.getTime());
+  }
+
+  @Test
+  public void minus_valid_returnsDateSubtractedByDiffConvertedToMs() {
+    long dateInMs = 1519130699000L;
+    Date date = new Date(dateInMs);
+    long expectedDiffInMs = 2 * 24 * 60 * 60 * 1000;
+
+    Date result = DateHelper.minus(date, 2, DateHelper.TimeUnit.DAYS);
+    assertEquals(dateInMs - expectedDiffInMs, result.getTime());
+  }
+
+  @Test
+  public void is_nullFirstDate_returnsFalse() {
+    boolean result = DateHelper.is(null, DateHelper.TimeComparator.BEFORE, GREATER_DATE);
+    assertFalse(result);
+  }
+
+  @Test
+  public void is_nullSecondDate_returnsFalse() {
+    boolean result = DateHelper.is(LESSER_DATE, DateHelper.TimeComparator.BEFORE, null);
+    assertFalse(result);
+  }
+
+  @Test
+  public void is_nullComparator_returnsFalse() {
+    boolean result = DateHelper.is(LESSER_DATE, null, GREATER_DATE);
+    assertFalse(result);
+  }
+
+  @Test
+  public void is_before() {
+    boolean result = DateHelper.is(LESSER_DATE, DateHelper.TimeComparator.BEFORE, GREATER_DATE);
+    assertTrue(result);
+
+    result = DateHelper.is(GREATER_DATE, DateHelper.TimeComparator.BEFORE, LESSER_DATE);
+    assertFalse(result);
+
+    result = DateHelper.is(LESSER_DATE, DateHelper.TimeComparator.BEFORE, LESSER_DATE);
+    assertFalse(result);
+  }
+
+  @Test
+  public void is_beforeOrEqualTo() {
+    boolean result = DateHelper.is(LESSER_DATE, DateHelper.TimeComparator.BEFORE_OR_EQUAL_TO, GREATER_DATE);
+    assertTrue(result);
+
+    result = DateHelper.is(GREATER_DATE, DateHelper.TimeComparator.BEFORE_OR_EQUAL_TO, LESSER_DATE);
+    assertFalse(result);
+
+    result = DateHelper.is(LESSER_DATE, DateHelper.TimeComparator.BEFORE_OR_EQUAL_TO, LESSER_DATE);
+    assertTrue(result);
+  }
+
+  @Test
+  public void is_equalTo() {
+    boolean result = DateHelper.is(LESSER_DATE, DateHelper.TimeComparator.EQUAL_TO, GREATER_DATE);
+    assertFalse(result);
+
+    result = DateHelper.is(GREATER_DATE, DateHelper.TimeComparator.EQUAL_TO, LESSER_DATE);
+    assertFalse(result);
+
+    result = DateHelper.is(LESSER_DATE, DateHelper.TimeComparator.EQUAL_TO, LESSER_DATE);
+    assertTrue(result);
+  }
+
+  @Test
+  public void is_notEqualTo() {
+    boolean result = DateHelper.is(LESSER_DATE, DateHelper.TimeComparator.NOT_EQUAL_TO, GREATER_DATE);
+    assertTrue(result);
+
+    result = DateHelper.is(GREATER_DATE, DateHelper.TimeComparator.NOT_EQUAL_TO, LESSER_DATE);
+    assertTrue(result);
+
+    result = DateHelper.is(LESSER_DATE, DateHelper.TimeComparator.NOT_EQUAL_TO, LESSER_DATE);
+    assertFalse(result);
+  }
+
+  @Test
+  public void is_after() {
+    boolean result = DateHelper.is(LESSER_DATE, DateHelper.TimeComparator.AFTER, GREATER_DATE);
+    assertFalse(result);
+
+    result = DateHelper.is(GREATER_DATE, DateHelper.TimeComparator.AFTER, LESSER_DATE);
+    assertTrue(result);
+
+    result = DateHelper.is(LESSER_DATE, DateHelper.TimeComparator.AFTER, LESSER_DATE);
+    assertFalse(result);
+  }
+
+  @Test
+  public void is_afterOrEqualTo() {
+    boolean result = DateHelper.is(LESSER_DATE, DateHelper.TimeComparator.AFTER_OR_EQUAL_TO, GREATER_DATE);
+    assertFalse(result);
+
+    result = DateHelper.is(GREATER_DATE, DateHelper.TimeComparator.AFTER_OR_EQUAL_TO, LESSER_DATE);
+    assertTrue(result);
+
+    result = DateHelper.is(LESSER_DATE, DateHelper.TimeComparator.AFTER_OR_EQUAL_TO, LESSER_DATE);
+    assertTrue(result);
+  }
 
   @Test
   public void now_returnsNewInstanceOfDate() {
@@ -35,6 +184,42 @@ public class DateHelperTest {
   @After
   public void tearDown() {
 
+  }
+
+  @Test
+  public void toMilliseconds_fromDays_returnsMilliseconds() {
+    long result = DateHelper.toMilliseconds(2, DAYS);
+    assertEquals(2 * 24 * 60 * 60 * 1000, result);
+  }
+
+  @Test
+  public void toMilliseconds_fromHours_returnsMilliseconds() {
+    long result = DateHelper.toMilliseconds(2, HOURS);
+    assertEquals(2 * 60 * 60 * 1000, result);
+  }
+
+  @Test
+  public void toMilliseconds_fromMinutes_returnsMilliseconds() {
+    long result = DateHelper.toMilliseconds(2, MINUTES);
+    assertEquals(2 * 60 * 1000, result);
+  }
+
+  @Test
+  public void toMilliseconds_fromSeconds_returnsMilliseconds() {
+    long result = DateHelper.toMilliseconds(2, SECONDS);
+    assertEquals(2 * 1000, result);
+  }
+
+  @Test
+  public void toMilliseconds_fromMilliseconds_returnsMilliseconds() {
+    long result = DateHelper.toMilliseconds(2, MILLISECONDS);
+    assertEquals(2, result);
+  }
+
+  @Test
+  public void toMilliseconds_nullUnit_returnsMilliseconds() {
+    long result = DateHelper.toMilliseconds(2, null);
+    assertEquals(2, result);
   }
 
   @Test

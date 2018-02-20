@@ -77,12 +77,12 @@ public class DateHelper {
   }
 
   /**
-   * Substracts the specified amount of time to the given {@code date}.
+   * Subtracts the specified amount of time to the given {@code date}.
    *
-   * @param date to be substracted
+   * @param date to be subtracted
    * @param diff amount of difference, to be paired with {@code unit}
    * @param unit of type {@link TimeUnit}
-   * @return new instance of {@link Date} with the substracted amount of time difference if the base
+   * @return new instance of {@link Date} with the subtracted amount of time difference if the base
    * {@code date} is not null, otherwise returns null
    */
   public static Date minus(Date date, int diff, TimeUnit unit) {
@@ -182,20 +182,29 @@ public class DateHelper {
     return "";
   }
 
+  /**
+   * Converts {@code input} to milliseconds with respect to the given {@code unit}
+   *
+   * @param input time, paired with {@code unit}
+   * @param unit  of type {@link TimeUnit}. <strong>Passing null will return the input itself, without converting it into milliseconds</strong>
+   * @return milliseconds value of {@input}.
+   */
   public static long toMilliseconds(long input, TimeUnit unit) {
-    while (unit != MILLISECONDS) {
-      if (unit == SECONDS) {
-        input *= 1000;
-        unit = MILLISECONDS;
-      } else if (unit == MINUTES) {
-        input *= 60;
-        unit = SECONDS;
-      } else if (unit == HOURS) {
-        input *= 60;
-        unit = MINUTES;
-      } else if (unit == DAYS) {
-        input *= 24;
-        unit = HOURS;
+    if (unit != null) {
+      while (unit != MILLISECONDS) {
+        if (unit == SECONDS) {
+          input *= 1000;
+          unit = MILLISECONDS;
+        } else if (unit == MINUTES) {
+          input *= 60;
+          unit = SECONDS;
+        } else if (unit == HOURS) {
+          input *= 60;
+          unit = MINUTES;
+        } else if (unit == DAYS) {
+          input *= 24;
+          unit = HOURS;
+        }
       }
     }
 
