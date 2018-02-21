@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
-import java.util.function.Function;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -45,13 +45,13 @@ public class CollectionHelper {
    *
    * @param <T> type of collection's content
    * @param coll collection to be iterated
-   * @param func function to evaluate the elements in {@code coll}, must return boolean
+   * @param func a boolean function to evaluate the elements in {@code coll}
    * @return matching element. If coll is empty or no matching element is found, returns null
    */
-  public static <T> T findInCollection(Collection<T> coll, Function<T, Boolean> func) {
+  public static <T> T findInCollection(Collection<T> coll, Predicate<T> func) {
     if (isNotEmpty(coll)) {
       for (T it : coll) {
-        if (func.apply(it)) {
+        if (func.test(it)) {
           return it;
         }
       }

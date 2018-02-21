@@ -187,7 +187,7 @@ public class DateHelper {
    *
    * @param input time, paired with {@code unit}
    * @param unit  of type {@link TimeUnit}. <strong>Passing null will return the input itself, without converting it into milliseconds</strong>
-   * @return milliseconds value of {@input}.
+   * @return milliseconds value of {@code input}.
    */
   public static long toMilliseconds(long input, TimeUnit unit) {
     if (unit != null) {

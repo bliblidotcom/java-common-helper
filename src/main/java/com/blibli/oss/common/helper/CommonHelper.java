@@ -120,6 +120,8 @@ public class CommonHelper {
   /**
    * Convenience method. Returns empty map if input is null.
    *
+   * @param <K> type of key
+   * @param <V> type of value
    * @param map map
    * @return new {@link HashMap} if null, the {@code map} itself otherwise
    */
