@@ -7,7 +7,9 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Objects;
 import java.util.Set;
+import java.util.function.Consumer;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -57,6 +59,20 @@ public class CollectionHelper {
       }
     }
     return null;
+  }
+
+  /**
+   * Executes function {@code func} on the given collection {@code coll}. <br/>
+   * Performs null check on both the function and the collection.
+   *
+   * @param coll subclass of {@link Iterable} on which the function {@code func} will be performed.
+   * @param func function to be performed on each element of the collection {@code coll}.
+   * @param <T> both the collection and function must be of the same type.
+   */
+  public static <T> void forEach(Iterable<T> coll, Consumer<T> func) {
+    if (coll != null && func != null) {
+      coll.forEach(func);
+    }
   }
 
   /**
@@ -158,7 +174,7 @@ public class CollectionHelper {
    */
   public static void sanitize(Collection<?> coll) {
     if (isNotEmpty(coll)) {
-      coll.removeIf(e -> e == null);
+      coll.removeIf(Objects::isNull);
     }
   }
 
@@ -201,10 +217,10 @@ public class CollectionHelper {
    *
    * @param <T> type of elements which will be converted to {@link HashSet}
    * @param elems to be converted into a {@link HashSet}
-   * @return null if elements if null, otherwise returns a new instance of {@link HashSet} of type T
+   * @return new {@link HashSet} of type T. Set will be populated by {@code elems} if {@code elems} is not null. Never returns null
    */
   public static <T> Set<T> toSet(T... elems) {
-    return elems == null ? new HashSet<>() : Stream.of(elems).filter(e -> e != null).collect(
+    return elems == null ? new HashSet<>() : Stream.of(elems).filter(Objects::nonNull).collect(
         Collectors.toSet());
   }
 
@@ -215,9 +231,9 @@ public class CollectionHelper {
    * @see Collectors#toList()
    * @param <T> type of elements which will be converted to {@link List}
    * @param elems to be converted into a {@link List}
-   * @return null if elems is null, otherwise returns a new instance of {@link ArrayList} of type T
+   * @return new {@link ArrayList} of type T. List will be populated by {@code elems} if {@code elems} is not null. Never returns null
    */
   public static <T> List<T> toList(T... elems) {
-    return elems == null ? new ArrayList<>() : Stream.of(elems).filter(e -> e != null).collect(Collectors.toList());
+    return elems == null ? new ArrayList<>() : Stream.of(elems).filter(Objects::nonNull).collect(Collectors.toList());
   }
 }

@@ -98,6 +98,66 @@ public class CollectionHelperTest {
   }
 
   @Test
+  public void forEach_nullFunction_noAction() {
+    List<Source> sources = new ArrayList<>();
+    sources.add(new Source());
+    CollectionHelper.forEach(sources, null);
+    assertNotNull(sources);
+  }
+
+  @Test
+  public void forEach_nullCollection_noAction() {
+    List<Source> sources = null;
+    CollectionHelper.forEach(sources, e -> e.setDoubleField(3.0));
+    assertNull(sources);
+  }
+
+  @Test
+  public void forEach_emptyCollection_noAction() {
+    List<Source> sources = new ArrayList<>();
+    CollectionHelper.forEach(sources, e -> e.setDoubleField(1.0));
+    assertNotNull(sources);
+  }
+
+  @Test
+  public void forEach_setValueOnSourceCollection_elementsUpdated() {
+    double expectedField = 5.5;
+    List<Source> sources = new ArrayList<>();
+    sources.add(new Source());
+    CollectionHelper.forEach(sources, e -> e.setDoubleField(expectedField));
+    assertNotNull(sources);
+  }
+
+  @Test
+  public void forEach_setValueOnSourceCollectionWithCondition_elementsUpdated() {
+    double expectedField = 5.5;
+    Source source1 = new Source();
+    source1.setSampleEnum(SampleEnum.ENUM_ONE);
+    source1.setDoubleField(1.0);
+
+    Source source2 = new Source();
+    source2.setSampleEnum(SampleEnum.ENUM_TWO);
+    source2.setDoubleField(2.0);
+
+    List<Source> sources = new ArrayList<>();
+    sources.add(source1);
+    sources.add(source2);
+
+    CollectionHelper.forEach(sources, e -> {
+      if (SampleEnum.ENUM_ONE.equals(e.getSampleEnum())) {
+        e.setDoubleField(e.getDoubleField() * expectedField);
+      }
+    });
+    assertNotNull(sources);
+
+    for (Source source : sources) {
+      if (SampleEnum.ENUM_ONE.equals(source.getSampleEnum())) {
+        assertEquals(expectedField, source.getDoubleField(), 0);
+      }
+    }
+  }
+
+  @Test
   public void isEmptyCollection_notEmptyCollection_returnsFalse() {
     List<Source> sources = new ArrayList<>();
     sources.add(source1);
