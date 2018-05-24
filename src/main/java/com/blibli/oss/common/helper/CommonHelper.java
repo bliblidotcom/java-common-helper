@@ -51,26 +51,31 @@ public class CommonHelper {
    * @throws InstantiationException propagated exception, see {@link Class#newInstance()}
    * @throws IllegalAccessException propagated exception, see {@link Class#newInstance()}
    */
-  @Deprecated
   public static <T> T denullify(T t, Class<T> clazz) throws InstantiationException,
       IllegalAccessException {
     return t == null ? clazz.newInstance() : t;
   }
 
   /**
-   * Denullifies the given object by substituting it with the provided {@code subs}. <br>
+   * Denullifies the given object by substituting it with the provided {@code sub} or {@code subs}. <br>
    * @param t object
+   * @param sub first substitute
    * @param subs array of substitutes
-   * @param <T> object type
+   * @param <T> type of object
+   * @param <S> type of substitutes. Must extend &lt;T&gt;
    * @return the object {@code t} itself if not null, otherwise returns the first non-null
    * substitute from {@code subs}. <strong>May return null if all substitutes are null.</strong>
    */
-  public static <T> T denullify(T t, T... subs) {
-    if (t == null && subs != null) {
-      for (T sub : subs) {
-        if (sub != null) {
-          t = sub;
-          break;
+  public static <T, S extends T> T denullify(T t, S sub, S... subs) {
+    if (t == null) {
+      if (sub != null) {
+        t = sub;
+      } else if (subs != null) {
+        for (T s : subs) {
+          if (s != null) {
+            t = s;
+            break;
+          }
         }
       }
     }

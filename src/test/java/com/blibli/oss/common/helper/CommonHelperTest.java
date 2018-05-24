@@ -167,7 +167,8 @@ public class CommonHelperTest {
     Source source = null;
     Source sub1 = null;
     Source sub2 = null;
-    Source result = denullify(source, sub1, sub2);
+    Source sub3 = null;
+    Source result = denullify(source, sub1, sub2, sub3);
     assertNull(result);
   }
 
@@ -175,9 +176,10 @@ public class CommonHelperTest {
   public void denullifyWithSub_nullObjectAndValidSub_returnsFirstNonNullSub() {
     Source source = null;
     Source sub1 = null;
-    Source sub2 = new Source(1, 1.1, "one", SampleEnum.ENUM_ONE);
-    Source result = denullify(source, sub1, sub2);
-    assertEquals(sub2, result);
+    Source sub2 = null;
+    Source sub3 = new Source(1, 1.1, "one", SampleEnum.ENUM_ONE);
+    Source result = denullify(source, sub1, sub2, sub3);
+    assertEquals(sub3, result);
 
     result = denullify(source, new Source());
     assertNotNull(result);
@@ -186,8 +188,9 @@ public class CommonHelperTest {
   @Test
   public void denullifyWithSub_nonNullObject_returnsThatObject() {
     Source source = new Source(1, 1.1, "one", SampleEnum.ENUM_ONE);
-    Source sub2 = new Source(2, 2.2, "two", SampleEnum.ENUM_TWO);
-    Source result = denullify(source, sub2, new Source());
+    Source sub1 = new Source(2, 2.2, "two", SampleEnum.ENUM_TWO);
+    Source sub2 = null;
+    Source result = denullify(source, sub1, sub2, new Source());
     assertEquals(source, result);
   }
 
