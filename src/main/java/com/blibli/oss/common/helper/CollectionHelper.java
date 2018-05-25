@@ -43,7 +43,7 @@ public class CollectionHelper {
   }
 
   /**
-   * Finds the first element that satisfies the given {@code func} in the collection.
+   * Finds the first element that satisfies the given predicate {@code func} in the collection.
    *
    * @param <T> type of collection's content
    * @param coll collection to be iterated
@@ -62,7 +62,7 @@ public class CollectionHelper {
   }
 
   /**
-   * Executes function {@code func} on the given collection {@code coll}. <br/>
+   * Executes function {@code func} on the given collection {@code coll}. <br>
    * Performs null check on both the function and the collection.
    *
    * @param coll subclass of {@link Iterable} on which the function {@code func} will be performed.
@@ -184,9 +184,8 @@ public class CollectionHelper {
    * @param <K> type of map's key
    * @param <V> type of map's value
    * @param map to be sanitized
-   * @return sanitized map
    */
-  public static <K, V> Map<K, V> sanitize(Map<K, V> map) {
+  public static <K, V> void sanitize(Map<K, V> map) {
     if (isNotEmpty(map)) {
       Iterator<Entry<K, V>> itr = map.entrySet().iterator();
 
@@ -197,7 +196,6 @@ public class CollectionHelper {
         }
       }
     }
-    return map;
   }
 
   /**
@@ -226,7 +224,7 @@ public class CollectionHelper {
 
   /**
    * Syntax sugar. Converts the given array of elements of type T to a new instance of
-   * {@link ArrayList} of the same type
+   * {@link ArrayList} of the same type. Only adds non-null elements into the list.
    *
    * @see Collectors#toList()
    * @param <T> type of elements which will be converted to {@link List}

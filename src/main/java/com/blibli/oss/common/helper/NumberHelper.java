@@ -43,9 +43,9 @@ public class NumberHelper {
    * Evaluates {@code num1} to {@code num2} according to the operand {@code cmp} <br>
    * For example:
    * <ul>
-   * <li>{@code is(5, {@link Comparator#LTE}, 5)} = <strong>true</strong></li>
-   * <li>{@code is(4, {@link Comparator#LTE}, 5)} = <strong>true</strong></li>
-   * <li>{@code is(5, {@link Comparator#LTE}, 4)} = <strong>false</strong></li>
+   * <li>{@code is(5, Comparator.LTE, 5)} = <strong>true</strong></li>
+   * <li>{@code is(4, Comparator.LTE, 5)} = <strong>true</strong></li>
+   * <li>{@code is(5, Comparator.LTE, 4)} = <strong>false</strong></li>
    * </ul>
    *
    * @param num1 first number

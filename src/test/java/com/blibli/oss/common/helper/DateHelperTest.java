@@ -7,11 +7,17 @@ import org.junit.Test;
 
 import java.util.Date;
 
-import static com.blibli.oss.common.helper.DateHelper.TimeUnit.DAYS;
-import static com.blibli.oss.common.helper.DateHelper.TimeUnit.HOURS;
-import static com.blibli.oss.common.helper.DateHelper.TimeUnit.MILLISECONDS;
-import static com.blibli.oss.common.helper.DateHelper.TimeUnit.MINUTES;
-import static com.blibli.oss.common.helper.DateHelper.TimeUnit.SECONDS;
+import static com.blibli.oss.common.helper.constants.TimeComparator.AFTER;
+import static com.blibli.oss.common.helper.constants.TimeComparator.AFTER_OR_EQUAL_TO;
+import static com.blibli.oss.common.helper.constants.TimeComparator.BEFORE;
+import static com.blibli.oss.common.helper.constants.TimeComparator.BEFORE_OR_EQUAL_TO;
+import static com.blibli.oss.common.helper.constants.TimeComparator.EQUAL_TO;
+import static com.blibli.oss.common.helper.constants.TimeComparator.NOT_EQUAL_TO;
+import static com.blibli.oss.common.helper.constants.TimeUnit.DAYS;
+import static com.blibli.oss.common.helper.constants.TimeUnit.HOURS;
+import static com.blibli.oss.common.helper.constants.TimeUnit.MILLISECONDS;
+import static com.blibli.oss.common.helper.constants.TimeUnit.MINUTES;
+import static com.blibli.oss.common.helper.constants.TimeUnit.SECONDS;
 import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertFalse;
 import static junit.framework.Assert.assertNotNull;
@@ -27,7 +33,7 @@ public class DateHelperTest {
 
   @Test
   public void add_nullDate_returnsNull() {
-    Date result = DateHelper.add(null, 10, DateHelper.TimeUnit.DAYS);
+    Date result = DateHelper.add(null, 10, DAYS);
     assertNull(result);
   }
 
@@ -46,13 +52,13 @@ public class DateHelperTest {
     Date date = new Date(dateInMs);
     long expectedDiffInMs = 2 * 24 * 60 * 60 * 1000;
 
-    Date result = DateHelper.add(date, 2, DateHelper.TimeUnit.DAYS);
+    Date result = DateHelper.add(date, 2, DAYS);
     assertEquals(dateInMs + expectedDiffInMs, result.getTime());
   }
 
   @Test
   public void minus_nullDate_returnsNull() {
-    Date result = DateHelper.minus(null, 10, DateHelper.TimeUnit.DAYS);
+    Date result = DateHelper.minus(null, 10, DAYS);
     assertNull(result);
   }
 
@@ -70,19 +76,19 @@ public class DateHelperTest {
     Date date = new Date(dateInMs);
     long expectedDiffInMs = 2 * 24 * 60 * 60 * 1000;
 
-    Date result = DateHelper.minus(date, 2, DateHelper.TimeUnit.DAYS);
+    Date result = DateHelper.minus(date, 2, DAYS);
     assertEquals(dateInMs - expectedDiffInMs, result.getTime());
   }
 
   @Test
   public void is_nullFirstDate_returnsFalse() {
-    boolean result = DateHelper.is(null, DateHelper.TimeComparator.BEFORE, GREATER_DATE);
+    boolean result = DateHelper.is(null, BEFORE, GREATER_DATE);
     assertFalse(result);
   }
 
   @Test
   public void is_nullSecondDate_returnsFalse() {
-    boolean result = DateHelper.is(LESSER_DATE, DateHelper.TimeComparator.BEFORE, null);
+    boolean result = DateHelper.is(LESSER_DATE, BEFORE, null);
     assertFalse(result);
   }
 
@@ -94,73 +100,73 @@ public class DateHelperTest {
 
   @Test
   public void is_before() {
-    boolean result = DateHelper.is(LESSER_DATE, DateHelper.TimeComparator.BEFORE, GREATER_DATE);
+    boolean result = DateHelper.is(LESSER_DATE, BEFORE, GREATER_DATE);
     assertTrue(result);
 
-    result = DateHelper.is(GREATER_DATE, DateHelper.TimeComparator.BEFORE, LESSER_DATE);
+    result = DateHelper.is(GREATER_DATE, BEFORE, LESSER_DATE);
     assertFalse(result);
 
-    result = DateHelper.is(LESSER_DATE, DateHelper.TimeComparator.BEFORE, LESSER_DATE);
+    result = DateHelper.is(LESSER_DATE, BEFORE, LESSER_DATE);
     assertFalse(result);
   }
 
   @Test
   public void is_beforeOrEqualTo() {
-    boolean result = DateHelper.is(LESSER_DATE, DateHelper.TimeComparator.BEFORE_OR_EQUAL_TO, GREATER_DATE);
+    boolean result = DateHelper.is(LESSER_DATE, BEFORE_OR_EQUAL_TO, GREATER_DATE);
     assertTrue(result);
 
-    result = DateHelper.is(GREATER_DATE, DateHelper.TimeComparator.BEFORE_OR_EQUAL_TO, LESSER_DATE);
+    result = DateHelper.is(GREATER_DATE, BEFORE_OR_EQUAL_TO, LESSER_DATE);
     assertFalse(result);
 
-    result = DateHelper.is(LESSER_DATE, DateHelper.TimeComparator.BEFORE_OR_EQUAL_TO, LESSER_DATE);
+    result = DateHelper.is(LESSER_DATE, BEFORE_OR_EQUAL_TO, LESSER_DATE);
     assertTrue(result);
   }
 
   @Test
   public void is_equalTo() {
-    boolean result = DateHelper.is(LESSER_DATE, DateHelper.TimeComparator.EQUAL_TO, GREATER_DATE);
+    boolean result = DateHelper.is(LESSER_DATE, EQUAL_TO, GREATER_DATE);
     assertFalse(result);
 
-    result = DateHelper.is(GREATER_DATE, DateHelper.TimeComparator.EQUAL_TO, LESSER_DATE);
+    result = DateHelper.is(GREATER_DATE, EQUAL_TO, LESSER_DATE);
     assertFalse(result);
 
-    result = DateHelper.is(LESSER_DATE, DateHelper.TimeComparator.EQUAL_TO, LESSER_DATE);
+    result = DateHelper.is(LESSER_DATE, EQUAL_TO, LESSER_DATE);
     assertTrue(result);
   }
 
   @Test
   public void is_notEqualTo() {
-    boolean result = DateHelper.is(LESSER_DATE, DateHelper.TimeComparator.NOT_EQUAL_TO, GREATER_DATE);
+    boolean result = DateHelper.is(LESSER_DATE, NOT_EQUAL_TO, GREATER_DATE);
     assertTrue(result);
 
-    result = DateHelper.is(GREATER_DATE, DateHelper.TimeComparator.NOT_EQUAL_TO, LESSER_DATE);
+    result = DateHelper.is(GREATER_DATE, NOT_EQUAL_TO, LESSER_DATE);
     assertTrue(result);
 
-    result = DateHelper.is(LESSER_DATE, DateHelper.TimeComparator.NOT_EQUAL_TO, LESSER_DATE);
+    result = DateHelper.is(LESSER_DATE, NOT_EQUAL_TO, LESSER_DATE);
     assertFalse(result);
   }
 
   @Test
   public void is_after() {
-    boolean result = DateHelper.is(LESSER_DATE, DateHelper.TimeComparator.AFTER, GREATER_DATE);
+    boolean result = DateHelper.is(LESSER_DATE, AFTER, GREATER_DATE);
     assertFalse(result);
 
-    result = DateHelper.is(GREATER_DATE, DateHelper.TimeComparator.AFTER, LESSER_DATE);
+    result = DateHelper.is(GREATER_DATE, AFTER, LESSER_DATE);
     assertTrue(result);
 
-    result = DateHelper.is(LESSER_DATE, DateHelper.TimeComparator.AFTER, LESSER_DATE);
+    result = DateHelper.is(LESSER_DATE, AFTER, LESSER_DATE);
     assertFalse(result);
   }
 
   @Test
   public void is_afterOrEqualTo() {
-    boolean result = DateHelper.is(LESSER_DATE, DateHelper.TimeComparator.AFTER_OR_EQUAL_TO, GREATER_DATE);
+    boolean result = DateHelper.is(LESSER_DATE, AFTER_OR_EQUAL_TO, GREATER_DATE);
     assertFalse(result);
 
-    result = DateHelper.is(GREATER_DATE, DateHelper.TimeComparator.AFTER_OR_EQUAL_TO, LESSER_DATE);
+    result = DateHelper.is(GREATER_DATE, AFTER_OR_EQUAL_TO, LESSER_DATE);
     assertTrue(result);
 
-    result = DateHelper.is(LESSER_DATE, DateHelper.TimeComparator.AFTER_OR_EQUAL_TO, LESSER_DATE);
+    result = DateHelper.is(LESSER_DATE, AFTER_OR_EQUAL_TO, LESSER_DATE);
     assertTrue(result);
   }
 

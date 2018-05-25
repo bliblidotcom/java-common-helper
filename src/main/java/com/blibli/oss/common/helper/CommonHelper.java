@@ -47,11 +47,12 @@ public class CommonHelper {
    * @param t object
    * @param clazz new instance of this class will be generated if input {@code t} is null
    * @param <T> object type
+   * @param <S> object type to be instantiated if {@code t} is null
    * @return null if {@code t} is null, otherwise returns new instance of {@code clazz}
    * @throws InstantiationException propagated exception, see {@link Class#newInstance()}
    * @throws IllegalAccessException propagated exception, see {@link Class#newInstance()}
    */
-  public static <T> T denullify(T t, Class<T> clazz) throws InstantiationException,
+  public static <T, S extends T> T denullify(T t, Class<S> clazz) throws InstantiationException,
       IllegalAccessException {
     return t == null ? clazz.newInstance() : t;
   }

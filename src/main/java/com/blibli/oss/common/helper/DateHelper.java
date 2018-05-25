@@ -2,63 +2,21 @@ package com.blibli.oss.common.helper;
 
 import org.apache.commons.lang3.StringUtils;
 import org.joda.time.format.DateTimeFormat;
+import com.blibli.oss.common.helper.constants.CommonDateTimePatterns;
+import com.blibli.oss.common.helper.constants.TimeUnit;
+import com.blibli.oss.common.helper.constants.TimeComparator;
 
 import java.util.Date;
-import static com.blibli.oss.common.helper.DateHelper.TimeUnit.MILLISECONDS;
-import static com.blibli.oss.common.helper.DateHelper.TimeUnit.SECONDS;
-import static com.blibli.oss.common.helper.DateHelper.TimeUnit.MINUTES;
-import static com.blibli.oss.common.helper.DateHelper.TimeUnit.HOURS;
-import static com.blibli.oss.common.helper.DateHelper.TimeUnit.DAYS;
+import static com.blibli.oss.common.helper.constants.TimeUnit.MILLISECONDS;
+import static com.blibli.oss.common.helper.constants.TimeUnit.SECONDS;
+import static com.blibli.oss.common.helper.constants.TimeUnit.MINUTES;
+import static com.blibli.oss.common.helper.constants.TimeUnit.HOURS;
+import static com.blibli.oss.common.helper.constants.TimeUnit.DAYS;
 
 /**
  * @author william.s.setiadi
  */
 public class DateHelper {
-
-  enum TimeUnit {
-    MILLISECONDS,
-    SECONDS,
-    MINUTES,
-    HOURS,
-    DAYS
-  }
-
-  enum TimeComparator {
-    BEFORE,
-    BEFORE_OR_EQUAL_TO,
-    EQUAL_TO,
-    NOT_EQUAL_TO,
-    AFTER,
-    AFTER_OR_EQUAL_TO
-  }
-
-  static class CommonDateTimePatterns {
-
-    /**
-     * Sample result: 29-01-17
-     */
-    public static final String dd_MM_yy = "dd-MM-yy";
-
-    /**
-     * Sample result: 29-01-2017
-     */
-    public static final String dd_MM_yyyy = "dd-MM-yyyy";
-
-    /**
-     * Sample result: 29-Jan-2017
-     */
-    public static final String dd_MMM_yyyy = "dd-MMM-yyyy";
-
-    /**
-     * Sample result: 29-Jan-2017 13:50
-     */
-    public static final String dd_MMM_yyyy__HH_mm = "dd-MMM-yyyy HH:mm";
-
-    /**
-     * Sample result: 29-Jan-2017 13:50:59
-     */
-    public static final String dd_MMM_yyyy__HH_mm_ss = "dd-MMM-yyyy HH:mm:ss";
-  }
 
   /**
    * Adds the specified amount of time to the given {@code date}.
@@ -77,7 +35,7 @@ public class DateHelper {
   }
 
   /**
-   * Subtracts the specified amount of time to the given {@code date}.
+   * Subtracts the specified amount of time from the given {@code date}.
    *
    * @param date to be subtracted
    * @param diff amount of difference, to be paired with {@code unit}
