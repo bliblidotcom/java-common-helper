@@ -59,14 +59,20 @@ public class DateHelper {
    * @return true if {@code firstDate} satisfies {@code comparator} when compared to {@code secondDate}.
    * <br>Returns false if one of the following is true:
    * <ul>
-   *   <li>{@code firstDate} is null</li>
-   *   <li>{@code secondDate} is null</li>
+   *   <li>Both {@code firstDate} and {@code secondDate} are null and {@link TimeComparator#EQUAL_TO} is not used</li>
+   *   <li>Both {@code firstDate} and {@code secondDate} are null and {@link TimeComparator#NOT_EQUAL_TO} is used</li>
+   *   <li>Both {@code firstDate} and {@code secondDate} are not null and {@link TimeComparator#NOT_EQUAL_TO} is used</li>
+   *   <li>Either one of {@code firstDate} or {@code secondDate} is null</li>
    *   <li>{@code comparator} is null</li>
    *   <li>{@code firstDate} does not satisfy {@code comparator} when compared to {@code secondDate} </li>
    * </ul>
    */
   public static boolean is(Date firstDate, TimeComparator comparator, Date secondDate) {
-    if (firstDate == null || secondDate == null) {
+    if (TimeComparator.EQUAL_TO.equals(comparator) && firstDate == null && secondDate == null) {
+      return true;
+    } else if (TimeComparator.NOT_EQUAL_TO.equals(comparator) && (firstDate == null ^ secondDate == null)) {
+      return true;
+    } else if (firstDate == null || secondDate == null) {
       return false;
     }
 

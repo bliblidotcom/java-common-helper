@@ -46,6 +46,8 @@ public class NumberHelper {
    * <li>{@code is(5, Comparator.LTE, 5)} = <strong>true</strong></li>
    * <li>{@code is(4, Comparator.LTE, 5)} = <strong>true</strong></li>
    * <li>{@code is(5, Comparator.LTE, 4)} = <strong>false</strong></li>
+   * <li>{@code is(null, Comparator.EQ, null)} = <strong>true</strong></li>
+   * <li>{@code is(null, Comparator.LTE, null)} = <strong>false</strong></li>
    * </ul>
    *
    * @param num1 first number
@@ -55,14 +57,20 @@ public class NumberHelper {
    *         to {@code num2} <br>
    *         <strong>false</strong> if either of the following is true:
    *         <ul>
-   *         <li>{@code num1} is null</li>
-   *         <li>{@code num2} is null</li>
-   *         <li>{@code num1} does not satisfy the operand {@code cmp} when evaluated to
-   *         {@code num2}</li>
+   *           <li>Both {@code num1} and {@code num2} are null and {@link Comparator#EQ} is not used</li>
+   *           <li>Both {@code num1} and {@code num2} are null and {@link Comparator#NEQ} is used</li>
+   *           <li>Both {@code num1} and {@code num2} are not null and {@link Comparator#NEQ} is used</li>
+   *           <li>Either one of {@code num1} or {@code num2} is null</li>
+   *           <li>{@code num1} does not satisfy the operand {@code cmp} when evaluated to
+   *           {@code num2}</li>
    *         </ul>
    */
   public static boolean is(BigDecimal num1, Comparator cmp, BigDecimal num2) {
-    if (num1 != null && num2 != null) {
+    if (Comparator.EQ.equals(cmp) && num1 == null && num2 == null) {
+      return true;
+    } else if (Comparator.NEQ.equals(cmp) && (num1 == null ^ num2 == null)) {
+      return true;
+    } else if (num1 != null && num2 != null) {
       return compare(cmp, num1.compareTo(num2));
     }
     return false;
@@ -78,7 +86,11 @@ public class NumberHelper {
    * @return see ref
    */
   public static boolean is(Double num1, Comparator cmp, Double num2) {
-    if (num1 != null && num2 != null) {
+    if (Comparator.EQ.equals(cmp) && num1 == null && num2 == null) {
+      return true;
+    } else if (Comparator.NEQ.equals(cmp) && (num1 == null ^ num2 == null)) {
+      return true;
+    } else if (num1 != null && num2 != null) {
       return compare(cmp, Double.compare(num1, num2));
     }
     return false;
@@ -94,7 +106,11 @@ public class NumberHelper {
    * @return see ref
    */
   public static boolean is(Long num1, Comparator cmp, Long num2) {
-    if (num1 != null && num2 != null) {
+    if (Comparator.EQ.equals(cmp) && num1 == null && num2 == null) {
+      return true;
+    } else if (Comparator.NEQ.equals(cmp) && (num1 == null ^ num2 == null)) {
+      return true;
+    } else if (num1 != null && num2 != null) {
       return compare(cmp, Long.compare(num1, num2));
     }
     return false;

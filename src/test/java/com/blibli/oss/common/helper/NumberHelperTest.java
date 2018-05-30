@@ -31,6 +31,9 @@ public class NumberHelperTest {
     boolean result = NumberHelper.is(num1, Comparator.GT, num2);
     assertFalse(result);
 
+    result = NumberHelper.is(num1, Comparator.EQ, num2);
+    assertTrue(result);
+
     num1 = BD_ONE;
     result = NumberHelper.is(num1, Comparator.GT, num2);
     assertFalse(result);
@@ -138,6 +141,21 @@ public class NumberHelperTest {
     boolean result = NumberHelper.is(num1, Comparator.NEQ, num2);
     assertTrue(result);
 
+    num1 = null;
+    num2 = null;
+    result = NumberHelper.is(num1, Comparator.NEQ, num2);
+    assertFalse(result);
+
+    num1 = BD_ONE;
+    num2 = null;
+    result = NumberHelper.is(num1, Comparator.NEQ, num2);
+    assertTrue(result);
+
+    num1 = null;
+    num2 = BD_ONE;
+    result = NumberHelper.is(num1, Comparator.NEQ, num2);
+    assertTrue(result);
+
     num1 = BD_ONE;
     num2 = BD_ONE;
     result = NumberHelper.is(num1, Comparator.NEQ, num2);
@@ -156,6 +174,9 @@ public class NumberHelperTest {
 
     boolean result = NumberHelper.is(num1, Comparator.GT, num2);
     assertFalse(result);
+
+    result = NumberHelper.is(num1, Comparator.EQ, num2);
+    assertTrue(result);
 
     num1 = D_ONE;
     result = NumberHelper.is(num1, Comparator.GT, num2);
@@ -264,6 +285,21 @@ public class NumberHelperTest {
     boolean result = NumberHelper.is(num1, Comparator.NEQ, num2);
     assertTrue(result);
 
+    num1 = null;
+    num2 = D_ONE;
+    result = NumberHelper.is(num1, Comparator.NEQ, num2);
+    assertTrue(result);
+
+    num1 = D_ONE;
+    num2 = null;
+    result = NumberHelper.is(num1, Comparator.NEQ, num2);
+    assertTrue(result);
+
+    num1 = null;
+    num2 = null;
+    result = NumberHelper.is(num1, Comparator.NEQ, num2);
+    assertFalse(result);
+
     num1 = D_ONE;
     num2 = D_ONE;
     result = NumberHelper.is(num1, Comparator.NEQ, num2);
@@ -282,6 +318,9 @@ public class NumberHelperTest {
 
     boolean result = NumberHelper.is(num1, Comparator.GT, num2);
     assertFalse(result);
+
+    result = NumberHelper.is(num1, Comparator.EQ, num2);
+    assertTrue(result);
 
     num1 = L_ONE;
     result = NumberHelper.is(num1, Comparator.GT, num2);
@@ -394,6 +433,21 @@ public class NumberHelperTest {
     num2 = L_ONE;
     result = NumberHelper.is(num1, Comparator.NEQ, num2);
     assertFalse(result);
+
+    num1 = null;
+    num2 = null;
+    result = NumberHelper.is(num1, Comparator.NEQ, num2);
+    assertFalse(result);
+
+    num1 = null;
+    num2 = L_ONE;
+    result = NumberHelper.is(num1, Comparator.NEQ, num2);
+    assertTrue(result);
+
+    num1 = L_ONE;
+    num2 = null;
+    result = NumberHelper.is(num1, Comparator.NEQ, num2);
+    assertTrue(result);
 
     num1 = L_TWO;
     num2 = L_ONE;

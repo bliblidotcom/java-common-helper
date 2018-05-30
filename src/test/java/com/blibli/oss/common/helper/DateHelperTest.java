@@ -93,6 +93,12 @@ public class DateHelperTest {
   }
 
   @Test
+  public void is_bothDatesAreNull_usesBeforeComparator_returnsFalse() {
+    boolean result = DateHelper.is(null, BEFORE, null);
+    assertFalse(result);
+  }
+
+  @Test
   public void is_nullComparator_returnsFalse() {
     boolean result = DateHelper.is(LESSER_DATE, null, GREATER_DATE);
     assertFalse(result);
@@ -132,6 +138,9 @@ public class DateHelperTest {
 
     result = DateHelper.is(LESSER_DATE, EQUAL_TO, LESSER_DATE);
     assertTrue(result);
+
+    result = DateHelper.is(null, EQUAL_TO, null);
+    assertTrue(result);
   }
 
   @Test
@@ -143,6 +152,15 @@ public class DateHelperTest {
     assertTrue(result);
 
     result = DateHelper.is(LESSER_DATE, NOT_EQUAL_TO, LESSER_DATE);
+    assertFalse(result);
+
+    result = DateHelper.is(null, NOT_EQUAL_TO, GREATER_DATE);
+    assertTrue(result);
+
+    result = DateHelper.is(LESSER_DATE, NOT_EQUAL_TO, null);
+    assertTrue(result);
+
+    result = DateHelper.is(null, NOT_EQUAL_TO, null);
     assertFalse(result);
   }
 
