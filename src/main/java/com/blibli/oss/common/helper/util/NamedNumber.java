@@ -102,9 +102,9 @@ public abstract class NamedNumber<T extends Number, U extends NamedNumber<T, ?>>
     @Override
     public String toString() {
         return new StringBuilder("[Value: ")
-                .append(this.value.toString())
+                .append(this.value)
                 .append(", Name: ")
-                .append(this.name.toString())
+                .append(this.name)
                 .append("]").toString();
     }
 
