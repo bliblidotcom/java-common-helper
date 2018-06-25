@@ -2,7 +2,6 @@ package com.blibli.oss.common.helper;
 
 import com.blibli.oss.common.helper.config.SampleEnum;
 import com.blibli.oss.common.helper.config.Source;
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
