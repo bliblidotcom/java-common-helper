@@ -27,7 +27,6 @@ import static org.junit.Assert.assertTrue;
 
 public class CommonHelperTest {
 
-  private static final String ROOT_PATH = "src/test/resources/commonHelperTest";
 
   @Test
   public void denullifyBoolean() {
@@ -237,11 +236,6 @@ public class CommonHelperTest {
   @Before
   public void setUp() {
     new CommonHelper();
-  }
-
-  @After
-  public void tearDown() {
-
   }
 
   @Test

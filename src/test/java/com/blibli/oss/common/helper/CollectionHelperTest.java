@@ -453,9 +453,4 @@ public class CollectionHelperTest {
     source1 = new Source(1, 1.1, "one", SampleEnum.ENUM_ONE);
     source2 = new Source(2, 2.2, "two", SampleEnum.ENUM_TWO);
   }
-
-  @After
-  public void tearDown() {
-
-  }
 }

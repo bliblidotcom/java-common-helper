@@ -1,7 +1,6 @@
 package com.blibli.oss.common.helper;
 
 import com.blibli.oss.common.helper.constants.Comparator;
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -28,19 +27,19 @@ public class NumberHelperTest {
     BigDecimal num1 = null;
     BigDecimal num2 = null;
 
-    boolean result = NumberHelper.is(num1, Comparator.GT, num2);
+    boolean result = is(num1, Comparator.GT, num2);
     assertFalse(result);
 
-    result = NumberHelper.is(num1, Comparator.EQ, num2);
+    result = is(num1, Comparator.EQ, num2);
     assertTrue(result);
 
     num1 = BD_ONE;
-    result = NumberHelper.is(num1, Comparator.GT, num2);
+    result = is(num1, Comparator.GT, num2);
     assertFalse(result);
 
     num1 = null;
     num2 = BD_TWO;
-    result = NumberHelper.is(num1, Comparator.GT, num2);
+    result = is(num1, Comparator.GT, num2);
     assertFalse(result);
   }
 
@@ -48,17 +47,17 @@ public class NumberHelperTest {
   public void is_bigDecimalGT() {
     BigDecimal num1 = BD_ONE;
     BigDecimal num2 = BD_TWO;
-    boolean result = NumberHelper.is(num1, Comparator.GT, num2);
+    boolean result = is(num1, Comparator.GT, num2);
     assertFalse(result);
 
     num1 = BD_ONE;
     num2 = BD_ONE;
-    result = NumberHelper.is(num1, Comparator.GT, num2);
+    result = is(num1, Comparator.GT, num2);
     assertFalse(result);
 
     num1 = BD_TWO;
     num2 = BD_ONE;
-    result = NumberHelper.is(num1, Comparator.GT, num2);
+    result = is(num1, Comparator.GT, num2);
     assertTrue(result);
   }
 
@@ -66,17 +65,17 @@ public class NumberHelperTest {
   public void is_bigDecimalGTE() {
     BigDecimal num1 = BD_ONE;
     BigDecimal num2 = BD_TWO;
-    boolean result = NumberHelper.is(num1, Comparator.GTE, num2);
+    boolean result = is(num1, Comparator.GTE, num2);
     assertFalse(result);
 
     num1 = BD_ONE;
     num2 = BD_ONE;
-    result = NumberHelper.is(num1, Comparator.GTE, num2);
+    result = is(num1, Comparator.GTE, num2);
     assertTrue(result);
 
     num1 = BD_TWO;
     num2 = BD_ONE;
-    result = NumberHelper.is(num1, Comparator.GTE, num2);
+    result = is(num1, Comparator.GTE, num2);
     assertTrue(result);
   }
 
@@ -84,17 +83,17 @@ public class NumberHelperTest {
   public void is_bigDecimalLT() {
     BigDecimal num1 = BD_ONE;
     BigDecimal num2 = BD_TWO;
-    boolean result = NumberHelper.is(num1, Comparator.LT, num2);
+    boolean result = is(num1, Comparator.LT, num2);
     assertTrue(result);
 
     num1 = BD_ONE;
     num2 = BD_ONE;
-    result = NumberHelper.is(num1, Comparator.LT, num2);
+    result = is(num1, Comparator.LT, num2);
     assertFalse(result);
 
     num1 = BD_TWO;
     num2 = BD_ONE;
-    result = NumberHelper.is(num1, Comparator.LT, num2);
+    result = is(num1, Comparator.LT, num2);
     assertFalse(result);
   }
 
@@ -102,17 +101,17 @@ public class NumberHelperTest {
   public void is_bigDecimalLTE() {
     BigDecimal num1 = BD_ONE;
     BigDecimal num2 = BD_TWO;
-    boolean result = NumberHelper.is(num1, Comparator.LTE, num2);
+    boolean result = is(num1, Comparator.LTE, num2);
     assertTrue(result);
 
     num1 = BD_ONE;
     num2 = BD_ONE;
-    result = NumberHelper.is(num1, Comparator.LTE, num2);
+    result = is(num1, Comparator.LTE, num2);
     assertTrue(result);
 
     num1 = BD_TWO;
     num2 = BD_ONE;
-    result = NumberHelper.is(num1, Comparator.LTE, num2);
+    result = is(num1, Comparator.LTE, num2);
     assertFalse(result);
   }
 
@@ -120,17 +119,17 @@ public class NumberHelperTest {
   public void is_bigDecimalEQ() {
     BigDecimal num1 = BD_ONE;
     BigDecimal num2 = BD_TWO;
-    boolean result = NumberHelper.is(num1, Comparator.EQ, num2);
+    boolean result = is(num1, Comparator.EQ, num2);
     assertFalse(result);
 
     num1 = BD_ONE;
     num2 = BD_ONE;
-    result = NumberHelper.is(num1, Comparator.EQ, num2);
+    result = is(num1, Comparator.EQ, num2);
     assertTrue(result);
 
     num1 = BD_TWO;
     num2 = BD_ONE;
-    result = NumberHelper.is(num1, Comparator.EQ, num2);
+    result = is(num1, Comparator.EQ, num2);
     assertFalse(result);
   }
 
@@ -138,32 +137,32 @@ public class NumberHelperTest {
   public void is_bigDecimalNEQ() {
     BigDecimal num1 = BD_ONE;
     BigDecimal num2 = BD_TWO;
-    boolean result = NumberHelper.is(num1, Comparator.NEQ, num2);
+    boolean result = is(num1, Comparator.NEQ, num2);
     assertTrue(result);
 
     num1 = null;
     num2 = null;
-    result = NumberHelper.is(num1, Comparator.NEQ, num2);
+    result = is(num1, Comparator.NEQ, num2);
     assertFalse(result);
 
     num1 = BD_ONE;
     num2 = null;
-    result = NumberHelper.is(num1, Comparator.NEQ, num2);
+    result = is(num1, Comparator.NEQ, num2);
     assertTrue(result);
 
     num1 = null;
     num2 = BD_ONE;
-    result = NumberHelper.is(num1, Comparator.NEQ, num2);
+    result = is(num1, Comparator.NEQ, num2);
     assertTrue(result);
 
     num1 = BD_ONE;
     num2 = BD_ONE;
-    result = NumberHelper.is(num1, Comparator.NEQ, num2);
+    result = is(num1, Comparator.NEQ, num2);
     assertFalse(result);
 
     num1 = BD_TWO;
     num2 = BD_ONE;
-    result = NumberHelper.is(num1, Comparator.NEQ, num2);
+    result = is(num1, Comparator.NEQ, num2);
     assertTrue(result);
   }
 
@@ -172,19 +171,19 @@ public class NumberHelperTest {
     Double num1 = null;
     Double num2 = null;
 
-    boolean result = NumberHelper.is(num1, Comparator.GT, num2);
+    boolean result = is(num1, Comparator.GT, num2);
     assertFalse(result);
 
-    result = NumberHelper.is(num1, Comparator.EQ, num2);
+    result = is(num1, Comparator.EQ, num2);
     assertTrue(result);
 
     num1 = D_ONE;
-    result = NumberHelper.is(num1, Comparator.GT, num2);
+    result = is(num1, Comparator.GT, num2);
     assertFalse(result);
 
     num1 = null;
     num2 = D_TWO;
-    result = NumberHelper.is(num1, Comparator.GT, num2);
+    result = is(num1, Comparator.GT, num2);
     assertFalse(result);
   }
 
@@ -192,17 +191,17 @@ public class NumberHelperTest {
   public void is_doubleGT() {
     Double num1 = D_ONE;
     Double num2 = D_TWO;
-    boolean result = NumberHelper.is(num1, Comparator.GT, num2);
+    boolean result = is(num1, Comparator.GT, num2);
     assertFalse(result);
 
     num1 = D_ONE;
     num2 = D_ONE;
-    result = NumberHelper.is(num1, Comparator.GT, num2);
+    result = is(num1, Comparator.GT, num2);
     assertFalse(result);
 
     num1 = D_TWO;
     num2 = D_ONE;
-    result = NumberHelper.is(num1, Comparator.GT, num2);
+    result = is(num1, Comparator.GT, num2);
     assertTrue(result);
   }
 
@@ -210,17 +209,17 @@ public class NumberHelperTest {
   public void is_doubleGTE() {
     Double num1 = D_ONE;
     Double num2 = D_TWO;
-    boolean result = NumberHelper.is(num1, Comparator.GTE, num2);
+    boolean result = is(num1, Comparator.GTE, num2);
     assertFalse(result);
 
     num1 = D_ONE;
     num2 = D_ONE;
-    result = NumberHelper.is(num1, Comparator.GTE, num2);
+    result = is(num1, Comparator.GTE, num2);
     assertTrue(result);
 
     num1 = D_TWO;
     num2 = D_ONE;
-    result = NumberHelper.is(num1, Comparator.GTE, num2);
+    result = is(num1, Comparator.GTE, num2);
     assertTrue(result);
   }
 
@@ -228,17 +227,17 @@ public class NumberHelperTest {
   public void is_doubleLT() {
     Double num1 = D_ONE;
     Double num2 = D_TWO;
-    boolean result = NumberHelper.is(num1, Comparator.LT, num2);
+    boolean result = is(num1, Comparator.LT, num2);
     assertTrue(result);
 
     num1 = D_ONE;
     num2 = D_ONE;
-    result = NumberHelper.is(num1, Comparator.LT, num2);
+    result = is(num1, Comparator.LT, num2);
     assertFalse(result);
 
     num1 = D_TWO;
     num2 = D_ONE;
-    result = NumberHelper.is(num1, Comparator.LT, num2);
+    result = is(num1, Comparator.LT, num2);
     assertFalse(result);
   }
 
@@ -246,17 +245,17 @@ public class NumberHelperTest {
   public void is_doubleLTE() {
     Double num1 = D_ONE;
     Double num2 = D_TWO;
-    boolean result = NumberHelper.is(num1, Comparator.LTE, num2);
+    boolean result = is(num1, Comparator.LTE, num2);
     assertTrue(result);
 
     num1 = D_ONE;
     num2 = D_ONE;
-    result = NumberHelper.is(num1, Comparator.LTE, num2);
+    result = is(num1, Comparator.LTE, num2);
     assertTrue(result);
 
     num1 = D_TWO;
     num2 = D_ONE;
-    result = NumberHelper.is(num1, Comparator.LTE, num2);
+    result = is(num1, Comparator.LTE, num2);
     assertFalse(result);
   }
 
@@ -264,17 +263,17 @@ public class NumberHelperTest {
   public void is_doubleEQ() {
     Double num1 = D_ONE;
     Double num2 = D_TWO;
-    boolean result = NumberHelper.is(num1, Comparator.EQ, num2);
+    boolean result = is(num1, Comparator.EQ, num2);
     assertFalse(result);
 
     num1 = D_ONE;
     num2 = D_ONE;
-    result = NumberHelper.is(num1, Comparator.EQ, num2);
+    result = is(num1, Comparator.EQ, num2);
     assertTrue(result);
 
     num1 = D_TWO;
     num2 = D_ONE;
-    result = NumberHelper.is(num1, Comparator.EQ, num2);
+    result = is(num1, Comparator.EQ, num2);
     assertFalse(result);
   }
 
@@ -282,32 +281,32 @@ public class NumberHelperTest {
   public void is_doubleNEQ() {
     Double num1 = D_ONE;
     Double num2 = D_TWO;
-    boolean result = NumberHelper.is(num1, Comparator.NEQ, num2);
+    boolean result = is(num1, Comparator.NEQ, num2);
     assertTrue(result);
 
     num1 = null;
     num2 = D_ONE;
-    result = NumberHelper.is(num1, Comparator.NEQ, num2);
+    result = is(num1, Comparator.NEQ, num2);
     assertTrue(result);
 
     num1 = D_ONE;
     num2 = null;
-    result = NumberHelper.is(num1, Comparator.NEQ, num2);
+    result = is(num1, Comparator.NEQ, num2);
     assertTrue(result);
 
     num1 = null;
     num2 = null;
-    result = NumberHelper.is(num1, Comparator.NEQ, num2);
+    result = is(num1, Comparator.NEQ, num2);
     assertFalse(result);
 
     num1 = D_ONE;
     num2 = D_ONE;
-    result = NumberHelper.is(num1, Comparator.NEQ, num2);
+    result = is(num1, Comparator.NEQ, num2);
     assertFalse(result);
 
     num1 = D_TWO;
     num2 = D_ONE;
-    result = NumberHelper.is(num1, Comparator.NEQ, num2);
+    result = is(num1, Comparator.NEQ, num2);
     assertTrue(result);
   }
 
@@ -316,19 +315,19 @@ public class NumberHelperTest {
     Long num1 = null;
     Long num2 = null;
 
-    boolean result = NumberHelper.is(num1, Comparator.GT, num2);
+    boolean result = is(num1, Comparator.GT, num2);
     assertFalse(result);
 
-    result = NumberHelper.is(num1, Comparator.EQ, num2);
+    result = is(num1, Comparator.EQ, num2);
     assertTrue(result);
 
     num1 = L_ONE;
-    result = NumberHelper.is(num1, Comparator.GT, num2);
+    result = is(num1, Comparator.GT, num2);
     assertFalse(result);
 
     num1 = null;
     num2 = L_TWO;
-    result = NumberHelper.is(num1, Comparator.GT, num2);
+    result = is(num1, Comparator.GT, num2);
     assertFalse(result);
   }
 
@@ -336,17 +335,17 @@ public class NumberHelperTest {
   public void is_longGT() {
     Long num1 = L_ONE;
     Long num2 = L_TWO;
-    boolean result = NumberHelper.is(num1, Comparator.GT, num2);
+    boolean result = is(num1, Comparator.GT, num2);
     assertFalse(result);
 
     num1 = L_ONE;
     num2 = L_ONE;
-    result = NumberHelper.is(num1, Comparator.GT, num2);
+    result = is(num1, Comparator.GT, num2);
     assertFalse(result);
 
     num1 = L_TWO;
     num2 = L_ONE;
-    result = NumberHelper.is(num1, Comparator.GT, num2);
+    result = is(num1, Comparator.GT, num2);
     assertTrue(result);
   }
 
@@ -354,17 +353,17 @@ public class NumberHelperTest {
   public void is_longGTE() {
     Long num1 = L_ONE;
     Long num2 = L_TWO;
-    boolean result = NumberHelper.is(num1, Comparator.GTE, num2);
+    boolean result = is(num1, Comparator.GTE, num2);
     assertFalse(result);
 
     num1 = L_ONE;
     num2 = L_ONE;
-    result = NumberHelper.is(num1, Comparator.GTE, num2);
+    result = is(num1, Comparator.GTE, num2);
     assertTrue(result);
 
     num1 = L_TWO;
     num2 = L_ONE;
-    result = NumberHelper.is(num1, Comparator.GTE, num2);
+    result = is(num1, Comparator.GTE, num2);
     assertTrue(result);
   }
 
@@ -372,17 +371,17 @@ public class NumberHelperTest {
   public void is_longLT() {
     Long num1 = L_ONE;
     Long num2 = L_TWO;
-    boolean result = NumberHelper.is(num1, Comparator.LT, num2);
+    boolean result = is(num1, Comparator.LT, num2);
     assertTrue(result);
 
     num1 = L_ONE;
     num2 = L_ONE;
-    result = NumberHelper.is(num1, Comparator.LT, num2);
+    result = is(num1, Comparator.LT, num2);
     assertFalse(result);
 
     num1 = L_TWO;
     num2 = L_ONE;
-    result = NumberHelper.is(num1, Comparator.LT, num2);
+    result = is(num1, Comparator.LT, num2);
     assertFalse(result);
   }
 
@@ -390,17 +389,17 @@ public class NumberHelperTest {
   public void is_longLTE() {
     Long num1 = L_ONE;
     Long num2 = L_TWO;
-    boolean result = NumberHelper.is(num1, Comparator.LTE, num2);
+    boolean result = is(num1, Comparator.LTE, num2);
     assertTrue(result);
 
     num1 = L_ONE;
     num2 = L_ONE;
-    result = NumberHelper.is(num1, Comparator.LTE, num2);
+    result = is(num1, Comparator.LTE, num2);
     assertTrue(result);
 
     num1 = L_TWO;
     num2 = L_ONE;
-    result = NumberHelper.is(num1, Comparator.LTE, num2);
+    result = is(num1, Comparator.LTE, num2);
     assertFalse(result);
   }
 
@@ -408,17 +407,17 @@ public class NumberHelperTest {
   public void is_longEQ() {
     Long num1 = L_ONE;
     Long num2 = L_TWO;
-    boolean result = NumberHelper.is(num1, Comparator.EQ, num2);
+    boolean result = is(num1, Comparator.EQ, num2);
     assertFalse(result);
 
     num1 = L_ONE;
     num2 = L_ONE;
-    result = NumberHelper.is(num1, Comparator.EQ, num2);
+    result = is(num1, Comparator.EQ, num2);
     assertTrue(result);
 
     num1 = L_TWO;
     num2 = L_ONE;
-    result = NumberHelper.is(num1, Comparator.EQ, num2);
+    result = is(num1, Comparator.EQ, num2);
     assertFalse(result);
   }
 
@@ -426,32 +425,32 @@ public class NumberHelperTest {
   public void is_longNEQ() {
     Long num1 = L_ONE;
     Long num2 = L_TWO;
-    boolean result = NumberHelper.is(num1, Comparator.NEQ, num2);
+    boolean result = is(num1, Comparator.NEQ, num2);
     assertTrue(result);
 
     num1 = L_ONE;
     num2 = L_ONE;
-    result = NumberHelper.is(num1, Comparator.NEQ, num2);
+    result = is(num1, Comparator.NEQ, num2);
     assertFalse(result);
 
     num1 = null;
     num2 = null;
-    result = NumberHelper.is(num1, Comparator.NEQ, num2);
+    result = is(num1, Comparator.NEQ, num2);
     assertFalse(result);
 
     num1 = null;
     num2 = L_ONE;
-    result = NumberHelper.is(num1, Comparator.NEQ, num2);
+    result = is(num1, Comparator.NEQ, num2);
     assertTrue(result);
 
     num1 = L_ONE;
     num2 = null;
-    result = NumberHelper.is(num1, Comparator.NEQ, num2);
+    result = is(num1, Comparator.NEQ, num2);
     assertTrue(result);
 
     num1 = L_TWO;
     num2 = L_ONE;
-    result = NumberHelper.is(num1, Comparator.NEQ, num2);
+    result = is(num1, Comparator.NEQ, num2);
     assertTrue(result);
   }
 
@@ -508,11 +507,6 @@ public class NumberHelperTest {
 
   @Before
   public void setUp() {
-
-  }
-
-  @After
-  public void tearDown() {
-
+    new NumberHelper();
   }
 }

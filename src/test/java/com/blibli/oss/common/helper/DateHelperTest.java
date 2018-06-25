@@ -202,12 +202,7 @@ public class DateHelperTest {
 
   @Before
   public void setUp() {
-
-  }
-
-  @After
-  public void tearDown() {
-
+    new DateHelper();
   }
 
   @Test

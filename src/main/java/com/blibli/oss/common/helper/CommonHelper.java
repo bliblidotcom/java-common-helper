@@ -70,12 +70,11 @@ public class CommonHelper {
   public static <T, S extends T> T denullify(T t, S sub, S... subs) {
     if (t == null) {
       if (sub != null) {
-        t = sub;
+        return sub;
       } else if (subs != null) {
         for (T s : subs) {
           if (s != null) {
-            t = s;
-            break;
+            return s;
           }
         }
       }

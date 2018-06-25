@@ -154,24 +154,26 @@ public class DateHelper {
    * @return milliseconds value of {@code input}.
    */
   public static long toMilliseconds(long input, TimeUnit unit) {
+    long result = input;
+
     if (unit != null) {
       while (unit != MILLISECONDS) {
         if (unit == SECONDS) {
-          input *= 1000;
+          result *= 1000;
           unit = MILLISECONDS;
         } else if (unit == MINUTES) {
-          input *= 60;
+          result *= 60;
           unit = SECONDS;
         } else if (unit == HOURS) {
-          input *= 60;
+          result *= 60;
           unit = MINUTES;
         } else if (unit == DAYS) {
-          input *= 24;
+          result *= 24;
           unit = HOURS;
         }
       }
     }
 
-    return input;
+    return result;
   }
 }
