@@ -1,8 +1,6 @@
 package com.blibli.oss.common.helper;
 
-import com.blibli.oss.common.helper.constants.CommonDateTimePatterns;
 import org.apache.commons.lang3.StringUtils;
-import org.joda.time.DateTime;
 import org.junit.Before;
 import org.junit.Test;
 
