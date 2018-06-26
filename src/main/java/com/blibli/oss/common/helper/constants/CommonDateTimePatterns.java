@@ -1,7 +1,7 @@
 package com.blibli.oss.common.helper.constants;
 
 /**
- * Common Date Time Patterns in conformity to {@link org.joda.time.format.DateTimeFormat}.
+ * Common Date Time Patterns in conformity with {@link org.joda.time.format.DateTimeFormat}.
  *
  * Created by william.s.setiadi on 5/25/2018.
  */
