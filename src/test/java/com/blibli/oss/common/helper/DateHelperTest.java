@@ -1,6 +1,8 @@
 package com.blibli.oss.common.helper;
 
+import com.blibli.oss.common.helper.constants.CommonDateTimePatterns;
 import org.apache.commons.lang3.StringUtils;
+import org.joda.time.DateTime;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -290,5 +292,37 @@ public class DateHelperTest {
   public void toString_validDateValidPattern_returnsFormattedDate() {
     String result = DateHelper.toString(new Date(), VALID_DATE_FORMAT_PATTERN);
     assertTrue(StringUtils.isNotBlank(result));
+  }
+
+  @Test
+  public void toString_commonDateTimePatterns_returnsFormattedDate() {
+    Date date = new DateTime(2018, 06, 15, 23, 59, 40, 307).toDate();
+
+    String result = DateHelper.toString(date, CommonDateTimePatterns.dd_MM_yy);
+    assertEquals("15-06-18", result);
+
+    result = DateHelper.toString(date, CommonDateTimePatterns.dd_MM_yyyy);
+    assertEquals("15-06-2018", result);
+
+    result = DateHelper.toString(date, CommonDateTimePatterns.dd_MMM_yyyy);
+    assertEquals("15 Jun 2018", result);
+
+    result = DateHelper.toString(date, CommonDateTimePatterns.dd_MMM_yyyy__HH_mm);
+    assertEquals("15 Jun 2018 23:59", result);
+
+    result = DateHelper.toString(date, CommonDateTimePatterns.dd_MMM_yyyy__hh_mm_a);
+    assertEquals("15 Jun 2018 11:59 PM", result);
+
+    result = DateHelper.toString(date, CommonDateTimePatterns.dd_MMM_yyyy__HH_mm_ss);
+    assertEquals("15 Jun 2018 23:59:40", result);
+
+    result = DateHelper.toString(date, CommonDateTimePatterns.dd_MMM_yyyy__hh_mm_ss_a);
+    assertEquals("15 Jun 2018 11:59:40 PM", result);
+
+    result = DateHelper.toString(date, CommonDateTimePatterns.dd_MMM_yyyy__HH_mm_ss_SSS);
+    assertEquals("15 Jun 2018 23:59:40.307", result);
+
+    result = DateHelper.toString(date, CommonDateTimePatterns.dd_MMM_yyyy__hh_mm_ss_SSS_a);
+    assertEquals("15 Jun 2018 11:59:40.307 PM", result);
   }
 }
