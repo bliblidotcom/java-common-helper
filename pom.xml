@@ -36,10 +36,9 @@
           <version>${maven-javadoc-plugin-version}</version>
           <executions>
             <execution>
-              <id>attach-javadocs</id>
+              <id>default-javadoc</id>
               <goals>
                 <goal>jar</goal>
-                <goal>test-jar</goal>
               </goals>
             </execution>
           </executions>
@@ -54,13 +53,71 @@
             <compilerArgument>-Xlint:none</compilerArgument>
           </configuration>
         </plugin>
+        <plugin>
+          <groupId>org.jacoco</groupId>
+          <artifactId>jacoco-maven-plugin</artifactId>
+          <version>${jacoco-maven-plugin-version}</version>
+          <executions>
+            <execution>
+              <id>default-prepare-agent</id>
+              <phase>compile</phase>
+              <goals>
+                <goal>prepare-agent</goal>
+              </goals>
+            </execution>
+            <execution>
+              <id>default-report</id>
+              <phase>test</phase>
+              <goals>
+                <goal>report</goal>
+              </goals>
+            </execution>
+          </executions>
+        </plugin>
+        <plugin>
+          <groupId>com.gavinmogan</groupId>
+          <artifactId>codacy-maven-plugin</artifactId>
+          <configuration>
+            <coverageReportFile>target/site/jacoco/jacoco.xml</coverageReportFile>
+          </configuration>
+          <executions>
+            <execution>
+              <id>codacy-coverage</id>
+              <phase>post-integration-test</phase>
+              <goals>
+                <goal>coverage</goal>
+              </goals>
+            </execution>
+          </executions>
+        </plugin>
       </plugins>
     </pluginManagement>
+
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-javadoc-plugin</artifactId>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-source-plugin</artifactId>
+      </plugin>
+      <plugin>
+        <groupId>org.jacoco</groupId>
+        <artifactId>jacoco-maven-plugin</artifactId>
+      </plugin>
+      <plugin>
+        <groupId>com.gavinmogan</groupId>
+        <artifactId>codacy-maven-plugin</artifactId>
+      </plugin>
+    </plugins>
   </build>
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <source-code-level>1.8</source-code-level>
+    <jacoco-maven-plugin-version>0.8.1</jacoco-maven-plugin-version>
+    <codacy-maven-plugin-version>1.0.3</codacy-maven-plugin-version>
     <commons-lang3-version>3.3.2</commons-lang3-version>
     <joda-time-version>2.4</joda-time-version>
     <junit-version>4.11</junit-version>
@@ -79,6 +136,11 @@
 
   <dependencyManagement>
     <dependencies>
+      <dependency>
+        <groupId>com.gavinmogan</groupId>
+        <artifactId>codacy-maven-plugin</artifactId>
+        <version>${codacy-maven-plugin-version}</version>
+      </dependency>
       <dependency>
         <groupId>org.apache.commons</groupId>
         <artifactId>commons-lang3</artifactId>
