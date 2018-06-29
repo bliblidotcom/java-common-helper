@@ -8,6 +8,14 @@
   <name>Java Common Helper</name>
   <packaging>jar</packaging>
 
+  <distributionManagement>
+    <repository>
+      <id>Bintray</id>
+      <name>Bintray</name>
+      <url>https://api.bintray.com/maven/bliblidotcom/maven/java-common-helper/;publish=1</url>
+    </repository>
+  </distributionManagement>
+
   <build>
     <pluginManagement>
       <plugins>
@@ -127,12 +135,6 @@
     <maven-source-plugin-version>2.3</maven-source-plugin-version>
     <maven-javadoc-plugin-version>2.9.1</maven-javadoc-plugin-version>
   </properties>
-
-  <scm>
-    <connection>scm:git:git@github.com:bliblidotcom/command-plugin.git</connection>
-    <developerConnection>scm:git:git@github.com:bliblidotcom/command-plugin.git</developerConnection>
-    <tag>HEAD</tag>
-  </scm>
 
   <dependencyManagement>
     <dependencies>
