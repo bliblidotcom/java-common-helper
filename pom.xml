@@ -3,14 +3,14 @@
 
   <groupId>com.blibli.oss.helpers</groupId>
   <artifactId>java-common-helper</artifactId>
-  <version>0.0.2-SNAPSHOT</version>
+  <version>0.0.2</version>
   <name>Java Common Helper</name>
   <packaging>jar</packaging>
 
   <scm>
     <connection>scm:git:git@github.com:bliblidotcom/java-common-helper.git</connection>
     <developerConnection>scm:git:git@github.com:bliblidotcom/java-common-helper.git</developerConnection>
-    <tag>HEAD</tag>
+    <tag>java-common-helper-0.0.2</tag>
   </scm>
 
   <distributionManagement>
