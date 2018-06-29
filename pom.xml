@@ -15,8 +15,8 @@
 
   <distributionManagement>
     <repository>
-      <id>Bintray</id>
-      <name>Bintray</name>
+      <id>bintray-bliblidotcom-maven</id>
+      <name>bliblidotcom-maven</name>
       <url>https://api.bintray.com/maven/bliblidotcom/maven/java-common-helper/;publish=1</url>
     </repository>
   </distributionManagement>
