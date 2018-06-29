@@ -8,6 +8,12 @@
   <name>Java Common Helper</name>
   <packaging>jar</packaging>
 
+  <scm>
+    <connection>scm:git@github.com:bliblidotcom/java-common-helper.git</connection>
+    <developerConnection>scm:git@github.com:bliblidotcom/java-common-helper.git</developerConnection>
+    <tag>HEAD</tag>
+  </scm>
+
   <distributionManagement>
     <repository>
       <id>Bintray</id>
