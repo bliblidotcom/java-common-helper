@@ -3,23 +3,23 @@
 
   <groupId>com.blibli.oss.helpers</groupId>
   <artifactId>java-common-helper</artifactId>
-  <version>0.0.7-SNAPSHOT</version>
+  <version>0.0.1.1-SNAPSHOT</version>
   <name>Java Common Helper</name>
   <packaging>jar</packaging>
 
   <scm>
     <connection>scm:git:git@github.com:bliblidotcom/java-common-helper.git</connection>
-    <developerConnection>scm:git:file///D:/Projects/Git/java-common-helper/trunk</developerConnection>
+    <developerConnection>scm:git:git@github.com:bliblidotcom/java-common-helper.git</developerConnection>
     <tag>HEAD</tag>
   </scm>
 
-  <!--<distributionManagement>-->
-    <!--<repository>-->
-      <!--<id>bintray-bliblidotcom-maven</id>-->
-      <!--<name>bliblidotcom-maven</name>-->
-      <!--<url>https://api.bintray.com/maven/bliblidotcom/maven/java-common-helper/;publish=1</url>-->
-    <!--</repository>-->
-  <!--</distributionManagement>-->
+  <distributionManagement>
+    <repository>
+      <id>libs-releases-local.artifactory.gdn-app.com</id>
+      <name>libs-releases-local.artifactory.gdn-app.com</name>
+      <url>https://artifactory.gdn-app.com/artifactory/libs-releases-local</url>
+    </repository>
+  </distributionManagement>
 
   <repositories>
     <repository>
@@ -63,14 +63,14 @@
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-javadoc-plugin</artifactId>
           <version>${maven-javadoc-plugin-version}</version>
-          <executions>
-            <execution>
-              <id>default-javadoc</id>
-              <goals>
-                <goal>jar</goal>
-              </goals>
-            </execution>
-          </executions>
+          <!--<executions>-->
+            <!--<execution>-->
+              <!--<id>default-javadoc</id>-->
+              <!--<goals>-->
+                <!--<goal>jar</goal>-->
+              <!--</goals>-->
+            <!--</execution>-->
+          <!--</executions>-->
         </plugin>
         <plugin>
           <groupId>org.jacoco</groupId>
