@@ -9,7 +9,7 @@
 
   <scm>
     <connection>scm:git:git@github.com:bliblidotcom/java-common-helper.git</connection>
-    <developerConnection>scm:git:git@github.com:bliblidotcom/java-common-helper.git</developerConnection>
+    <developerConnection>scm:git:file///D:/Projects/Git/java-common-helper/trunk</developerConnection>
     <tag>HEAD</tag>
   </scm>
 
@@ -134,6 +134,7 @@
           <artifactId>maven-release-plugin</artifactId>
           <version>${maven-release-plugin-version}</version>
           <configuration>
+            <tagBase>scm:git:file///D:/Projects/Git/java-common-helper/tags</tagBase>
             <releaseProfiles>release</releaseProfiles>
           </configuration>
         </plugin>
