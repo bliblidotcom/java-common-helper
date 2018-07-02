@@ -13,21 +13,37 @@
     <tag>HEAD</tag>
   </scm>
 
-  <distributionManagement>
+  <!--<distributionManagement>-->
+    <!--<repository>-->
+      <!--<id>bintray-bliblidotcom-maven</id>-->
+      <!--<name>bliblidotcom-maven</name>-->
+      <!--<url>https://api.bintray.com/maven/bliblidotcom/maven/java-common-helper/;publish=1</url>-->
+    <!--</repository>-->
+  <!--</distributionManagement>-->
+
+  <repositories>
     <repository>
+      <snapshots>
+        <enabled>false</enabled>
+      </snapshots>
       <id>bintray-bliblidotcom-maven</id>
-      <name>bliblidotcom-maven</name>
-      <url>https://api.bintray.com/maven/bliblidotcom/maven/java-common-helper/;publish=1</url>
+      <name>bintray</name>
+      <url>https://dl.bintray.com/bliblidotcom/maven</url>
     </repository>
-  </distributionManagement>
+  </repositories>
 
   <build>
     <pluginManagement>
       <plugins>
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
-          <artifactId>maven-release-plugin</artifactId>
-          <version>${maven-release-plugin-version}</version>
+          <artifactId>maven-compiler-plugin</artifactId>
+          <version>${maven-compiler-plugin-version}</version>
+          <configuration>
+            <source>${source-code-level}</source>
+            <target>${source-code-level}</target>
+            <compilerArgument>-Xlint:none</compilerArgument>
+          </configuration>
         </plugin>
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
@@ -57,52 +73,69 @@
           </executions>
         </plugin>
         <plugin>
-          <groupId>org.apache.maven.plugins</groupId>
-          <artifactId>maven-compiler-plugin</artifactId>
-          <version>${maven-compiler-plugin-version}</version>
-          <configuration>
-            <source>${source-code-level}</source>
-            <target>${source-code-level}</target>
-            <compilerArgument>-Xlint:none</compilerArgument>
-          </configuration>
-        </plugin>
-        <plugin>
           <groupId>org.jacoco</groupId>
           <artifactId>jacoco-maven-plugin</artifactId>
           <version>${jacoco-maven-plugin-version}</version>
-          <executions>
-            <execution>
-              <id>default-prepare-agent</id>
-              <phase>compile</phase>
-              <goals>
-                <goal>prepare-agent</goal>
-              </goals>
-            </execution>
-            <execution>
-              <id>default-report</id>
-              <phase>test</phase>
-              <goals>
-                <goal>report</goal>
-              </goals>
-            </execution>
-          </executions>
-        </plugin>
-        <plugin>
-          <groupId>com.gavinmogan</groupId>
-          <artifactId>codacy-maven-plugin</artifactId>
-          <version>${codacy-maven-plugin-version}</version>
           <configuration>
-            <coverageReportFile>target/site/jacoco/jacoco.xml</coverageReportFile>
+            <rules>
+              <rule implementation="org.jacoco.maven.RuleConfiguration">
+                <element>BUNDLE</element>
+                <limits>
+                  <limit implementation="org.jacoco.report.check.Limit">
+                    <counter>INSTRUCTION</counter>
+                    <value>COVEREDRATIO</value>
+                    <minimum>0.95</minimum>
+                  </limit>
+                  <limit implementation="org.jacoco.report.check.Limit">
+                    <counter>LINE</counter>
+                    <value>COVEREDRATIO</value>
+                    <minimum>0.95</minimum>
+                  </limit>
+                </limits>
+              </rule>
+            </rules>
           </configuration>
-          <executions>
-            <execution>
-              <id>codacy-coverage</id>
-              <phase>post-integration-test</phase>
-              <goals>
-                <goal>coverage</goal>
-              </goals>
-            </execution>
-          </executions>
+          <!--<executions>-->
+            <!--<execution>-->
+              <!--<id>default-prepare-agent</id>-->
+              <!--<phase>compile</phase>-->
+              <!--<goals>-->
+                <!--<goal>prepare-agent</goal>-->
+              <!--</goals>-->
+            <!--</execution>-->
+            <!--<execution>-->
+              <!--<id>default-report</id>-->
+              <!--<phase>test</phase>-->
+              <!--<goals>-->
+                <!--<goal>report</goal>-->
+              <!--</goals>-->
+            <!--</execution>-->
+          <!--</executions>-->
+        </plugin>
+        <!--<plugin>-->
+          <!--<groupId>com.gavinmogan</groupId>-->
+          <!--<artifactId>codacy-maven-plugin</artifactId>-->
+          <!--<version>${codacy-maven-plugin-version}</version>-->
+          <!--<configuration>-->
+            <!--<coverageReportFile>target/site/jacoco/jacoco.xml</coverageReportFile>-->
+          <!--</configuration>-->
+          <!--<executions>-->
+            <!--<execution>-->
+              <!--<id>codacy-coverage</id>-->
+              <!--<phase>post-integration-test</phase>-->
+              <!--<goals>-->
+                <!--<goal>coverage</goal>-->
+              <!--</goals>-->
+            <!--</execution>-->
+          <!--</executions>-->
+        <!--</plugin>-->
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-release-plugin</artifactId>
+          <version>${maven-release-plugin-version}</version>
+          <configuration>
+            <releaseProfiles>release</releaseProfiles>
+          </configuration>
         </plugin>
       </plugins>
     </pluginManagement>
