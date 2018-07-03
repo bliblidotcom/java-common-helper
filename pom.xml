@@ -89,7 +89,7 @@
           <executions>
             <execution>
               <id>codacy-coverage</id>
-              <phase>post-integration-test</phase>
+              <phase>package</phase>
               <goals>
                 <goal>coverage</goal>
               </goals>
