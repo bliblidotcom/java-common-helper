@@ -337,6 +337,20 @@ public class CollectionHelperTest {
     assertFalse(result);
   }
 
+  @Test(expected = UnsupportedOperationException.class)
+  public void sanitizeCollection_immutableList_throwsUnsupportedOperationException() {
+    List<Source> list = new ArrayList<>();
+    list.add(source1);
+    list.add(null);
+    list.add(source2);
+    list.add(null);
+
+    List<Source> sources = Collections.unmodifiableList(list);
+    assertEquals(4, sources.size());
+
+    CollectionHelper.sanitize(sources);
+  }
+
   @Test
   public void sanitizeCollection_notEmptyCollection_returnsSanitizedCollection() {
     List<Source> sources = new ArrayList<>();
@@ -380,6 +394,18 @@ public class CollectionHelperTest {
     assertEquals("valone", map.get("keyone"));
     assertEquals("valtwo", map.get(""));
     assertEquals("", map.get("keyfour"));
+  }
+
+  @Test(expected = UnsupportedOperationException.class)
+  public void sanitizeMap_immutableMap_throwsUnsupportedOperationException() {
+    Map<String, Source> map = new HashMap<>();
+    map.put("keyone", source1);
+    map.put("", source2);
+    map.put(null, source1);
+    map.put("keyfour", null);
+
+    Map<String, Source> immutableMap = Collections.unmodifiableMap(map);
+    CollectionHelper.sanitize(immutableMap);
   }
 
   @Test

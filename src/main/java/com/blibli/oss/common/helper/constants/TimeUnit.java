@@ -17,12 +17,16 @@
 package com.blibli.oss.common.helper.constants;
 
 /**
+ * General purpose time unit.
+ *
  * Created by william.s.setiadi on 5/25/2018.
  */
 public enum TimeUnit {
+  NANOSECONDS,
   MILLISECONDS,
   SECONDS,
   MINUTES,
   HOURS,
-  DAYS
+  DAYS,
+  WEEKS
 }

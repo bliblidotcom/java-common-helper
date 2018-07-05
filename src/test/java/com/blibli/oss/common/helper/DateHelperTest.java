@@ -20,6 +20,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.rmi.server.ExportException;
 import java.util.Date;
 
 import static com.blibli.oss.common.helper.constants.TimeComparator.AFTER;
@@ -32,7 +33,9 @@ import static com.blibli.oss.common.helper.constants.TimeUnit.DAYS;
 import static com.blibli.oss.common.helper.constants.TimeUnit.HOURS;
 import static com.blibli.oss.common.helper.constants.TimeUnit.MILLISECONDS;
 import static com.blibli.oss.common.helper.constants.TimeUnit.MINUTES;
+import static com.blibli.oss.common.helper.constants.TimeUnit.NANOSECONDS;
 import static com.blibli.oss.common.helper.constants.TimeUnit.SECONDS;
+import static com.blibli.oss.common.helper.constants.TimeUnit.WEEKS;
 import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertFalse;
 import static junit.framework.Assert.assertNotNull;
@@ -221,6 +224,13 @@ public class DateHelperTest {
   }
 
   @Test
+  public void toMilliseconds_fromWeeks_returnsMilliseconds() {
+    long result = DateHelper.toMilliseconds(2, WEEKS);
+    long expectedResult = 14L * 24L * 60L * 60L * 1000L;
+    assertEquals(expectedResult, result);
+  }
+
+  @Test
   public void toMilliseconds_fromDays_returnsMilliseconds() {
     long result = DateHelper.toMilliseconds(2, DAYS);
     assertEquals(2 * 24 * 60 * 60 * 1000, result);
@@ -242,6 +252,12 @@ public class DateHelperTest {
   public void toMilliseconds_fromSeconds_returnsMilliseconds() {
     long result = DateHelper.toMilliseconds(2, SECONDS);
     assertEquals(2 * 1000, result);
+  }
+
+  @Test
+  public void toMilliseconds_fromNanoseconds_returnsMilliseconds() {
+    long result = DateHelper.toMilliseconds(2000, NANOSECONDS);
+    assertEquals(2, result);
   }
 
   @Test

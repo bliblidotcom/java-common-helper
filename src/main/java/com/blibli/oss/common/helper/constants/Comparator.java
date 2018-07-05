@@ -17,6 +17,8 @@
 package com.blibli.oss.common.helper.constants;
 
 /**
+ * General purpose comparator.
+ *
  * Created by william.s.setiadi on 2/9/2018.
  */
 public enum Comparator {

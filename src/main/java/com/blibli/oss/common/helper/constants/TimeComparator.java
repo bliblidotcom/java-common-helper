@@ -17,6 +17,8 @@
 package com.blibli.oss.common.helper.constants;
 
 /**
+ * Time comparator. Provides better context when comparing time than {@link Comparator}.
+ *
  * Created by william.s.setiadi on 5/25/2018.
  */
 public enum TimeComparator {

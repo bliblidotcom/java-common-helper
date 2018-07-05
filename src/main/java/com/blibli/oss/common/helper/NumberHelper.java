@@ -56,18 +56,19 @@ public class NumberHelper {
   }
 
   /**
-   * Evaluates {@code num1} to {@code num2} according to the operand {@code cmp} <br>
+   * Evaluates {@code num1} to {@code num2} according to the operand {@code cmp}. <br>
    * For example:
    * <ul>
    * <li><code>is(5, {@link Comparator#LTE}, 5)</code> = <strong>true</strong></li>
    * <li><code>is(4, {@link Comparator#LTE}, 5)</code> = <strong>true</strong></li>
    * <li><code>is(5, {@link Comparator#LTE}, 4)</code> = <strong>false</strong></li>
+   * <li><code>is(null, {@link Comparator#LTE}, 5)</code> = <strong>false</strong></li>
    * <li><code>is(null, {@link Comparator#EQ}, null)</code> = <strong>true</strong></li>
    * <li><code>is(null, {@link Comparator#LTE}, null)</code> = <strong>false</strong></li>
    * </ul>
    *
    * @param num1 first number
-   * @param cmp of type {@link Comparator}
+   * @param cmp {@link Comparator}
    * @param num2 second number
    * @return <strong>true</strong> if {@code num1} satisfies the operand {@code cmp} when evaluated
    *         to {@code num2} <br>
@@ -133,12 +134,12 @@ public class NumberHelper {
   }
 
   /**
-   * Parses the given {@code str} as {@code double}
+   * Parses the given {@code str} as {@code double}.
    *
    * @param str to be parsed to double
    * @param parseMode to specify whether to suppress parsing exceptions or not
-   * @return parsed double. If exception occurs and parseMode is
-   *         {@link ParseMode#SUPPRESS_EXCEPTION}, returns 0d
+   * @return parsed double. If an exception occurs and parseMode is
+   *         {@link ParseMode#SUPPRESS_EXCEPTION}, returns <code>0d</code>
    * @throws NumberFormatException if parseMode is {@link ParseMode#STRICT}
    */
   public static double parseDouble(String str, ParseMode parseMode) {
@@ -154,11 +155,11 @@ public class NumberHelper {
   }
 
   /**
-   * Parses the given {@code str} as int
+   * Parses the given {@code str} as int.
    *
    * @param str to be parsed to int
    * @param parseMode to specify whether to suppress parsing exceptions or not
-   * @return parsed int. If exception occurs and parseMode is {@link ParseMode#SUPPRESS_EXCEPTION},
+   * @return parsed int. If an exception occurs and parseMode is {@link ParseMode#SUPPRESS_EXCEPTION},
    *         returns 0
    * @throws NumberFormatException if parseMode is {@link ParseMode#STRICT}
    */
@@ -175,12 +176,12 @@ public class NumberHelper {
   }
 
   /**
-   * Parses the given {@code str} as long
+   * Parses the given {@code str} as long.
    *
    * @param str to be parsed to long
    * @param parseMode to specify whether to suppress parsing exceptions or not
    * @return parsed long. If exception occurs and parseMode is {@link ParseMode#SUPPRESS_EXCEPTION},
-   *         returns 0L
+   *         returns <code>0L</code>
    * @throws NumberFormatException if parseMode is {@link ParseMode#STRICT}
    */
   public static long parseLong(String str, ParseMode parseMode) {

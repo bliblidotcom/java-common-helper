@@ -24,10 +24,12 @@ import com.blibli.oss.common.helper.constants.TimeComparator;
 
 import java.util.Date;
 import static com.blibli.oss.common.helper.constants.TimeUnit.MILLISECONDS;
+import static com.blibli.oss.common.helper.constants.TimeUnit.NANOSECONDS;
 import static com.blibli.oss.common.helper.constants.TimeUnit.SECONDS;
 import static com.blibli.oss.common.helper.constants.TimeUnit.MINUTES;
 import static com.blibli.oss.common.helper.constants.TimeUnit.HOURS;
 import static com.blibli.oss.common.helper.constants.TimeUnit.DAYS;
+import static com.blibli.oss.common.helper.constants.TimeUnit.WEEKS;
 
 /**
  * @author william.s.setiadi on 2/19/2018.
@@ -38,8 +40,8 @@ public class DateHelper {
    * Adds the specified amount of time to the given {@code date}.
    *
    * @param date to be added
-   * @param diff amount of difference, to be paired with {@code unit}
-   * @param unit of type {@link TimeUnit}
+   * @param diff time difference (numeric), to be paired with {@code unit}
+   * @param unit {@link TimeUnit}
    * @return new instance of {@link Date} with the added amount of time difference if the base
    * {@code date} is not null, otherwise returns null
    */
@@ -54,8 +56,8 @@ public class DateHelper {
    * Subtracts the specified amount of time from the given {@code date}.
    *
    * @param date to be subtracted
-   * @param diff amount of difference, to be paired with {@code unit}
-   * @param unit of type {@link TimeUnit}
+   * @param diff time difference (numeric), to be paired with {@code unit}
+   * @param unit {@link TimeUnit}
    * @return new instance of {@link Date} with the subtracted amount of time difference if the base
    * {@code date} is not null, otherwise returns null
    */
@@ -78,7 +80,7 @@ public class DateHelper {
    *   <li>Both {@code firstDate} and {@code secondDate} are null and {@link TimeComparator#EQUAL_TO} is not used</li>
    *   <li>Both {@code firstDate} and {@code secondDate} are null and {@link TimeComparator#NOT_EQUAL_TO} is used</li>
    *   <li>Both {@code firstDate} and {@code secondDate} are not null and {@link TimeComparator#NOT_EQUAL_TO} is used</li>
-   *   <li>Either one of {@code firstDate} or {@code secondDate} is null</li>
+   *   <li>Either {@code firstDate} or {@code secondDate} is null</li>
    *   <li>{@code comparator} is null</li>
    *   <li>{@code firstDate} does not satisfy {@code comparator} when compared to {@code secondDate} </li>
    * </ul>
@@ -110,7 +112,7 @@ public class DateHelper {
   }
 
   /**
-   * Syntax sugar. Returns new {@link Date}
+   * Syntax sugar. Returns new {@link Date}.
    *
    * @return new {@link Date}
    */
@@ -119,7 +121,7 @@ public class DateHelper {
   }
 
   /**
-   * Returns string representation of the current time according to the given {@code pattern}
+   * Returns string representation of the current time according to the given {@code pattern}.
    *
    * @see DateHelper#now()
    * @see DateTimeFormat
@@ -136,8 +138,8 @@ public class DateHelper {
    * @param str to be parsed
    * @param pattern must conform to the specifications of {@link DateTimeFormat}.
    *                Common patterns can be found in {@link CommonDateTimePatterns}.
-   * @return new instance of {@link Date} if neither {@code str} nor {@code pattern} is blank, null
-   *         otherwise
+   * @return new instance of {@link Date} with the parsed value if neither {@code str} nor
+   *         {@code pattern} is blank, otherwise returns null
    */
   public static Date toDate(String str, String pattern) {
     if (StringUtils.isNoneBlank(str, pattern)) {
@@ -148,7 +150,7 @@ public class DateHelper {
 
   /**
    * Returns string representation of the given {@code date} and formats it according to the given
-   * {@code pattern}
+   * {@code pattern}.
    *
    * @param date to be converted to String
    * @param pattern must conform to the specifications of {@link DateTimeFormat}.
@@ -163,10 +165,11 @@ public class DateHelper {
   }
 
   /**
-   * Converts {@code input} to milliseconds with respect to the given {@code unit}
+   * Converts {@code input} to milliseconds with respect to the given {@code unit}.
    *
    * @param input time, paired with {@code unit}
-   * @param unit  of type {@link TimeUnit}. <strong>Passing null will return the input itself, without converting it into milliseconds</strong>
+   * @param unit  of type {@link TimeUnit}. <strong>Passing null will return the input itself,
+   *              without converting it into milliseconds</strong>
    * @return milliseconds value of {@code input}.
    */
   public static long toMilliseconds(long input, TimeUnit unit) {
@@ -174,7 +177,10 @@ public class DateHelper {
 
     if (unit != null) {
       while (unit != MILLISECONDS) {
-        if (unit == SECONDS) {
+        if (unit == NANOSECONDS) {
+          result /= 1000;
+          unit = MILLISECONDS;
+        } else if (unit == SECONDS) {
           result *= 1000;
           unit = MILLISECONDS;
         } else if (unit == MINUTES) {
@@ -186,6 +192,9 @@ public class DateHelper {
         } else if (unit == DAYS) {
           result *= 24;
           unit = HOURS;
+        } else if (unit == WEEKS) {
+          result *= 7;
+          unit = DAYS;
         }
       }
     }

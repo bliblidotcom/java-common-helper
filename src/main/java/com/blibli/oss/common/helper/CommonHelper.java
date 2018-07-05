@@ -35,7 +35,7 @@ import java.util.function.Function;
 public class CommonHelper {
 
   /**
-   * Convenience method. Returns default value of {@link Boolean} if input is null.
+   * Returns default value of {@link Boolean} (i.e. <code>false</code>) if input is null.
    *
    * @param bool Boolean
    * @return false if input is null, otherwise returns input
@@ -45,7 +45,7 @@ public class CommonHelper {
   }
 
   /**
-   * Returns new {@link Date} if the given {@code date} is null
+   * Returns new {@link Date} if the given {@code date} is null.
    *
    * @param date to be checked
    * @return <strong>{@code date}</strong> if not null, new {@link Date} otherwise
@@ -55,7 +55,7 @@ public class CommonHelper {
   }
 
   /**
-   * Convenience method. Returns new instance of {@code clazz} if the input {@code t} is null.
+   * Returns new instance of {@code clazz} if the input {@code t} is null.
    * <br> New instance is generated using {@link Class#newInstance()} and all exceptions thrown
    * are propagated.
    *
@@ -74,14 +74,16 @@ public class CommonHelper {
   }
 
   /**
-   * Denullifies the given object by substituting it with the provided {@code sub} or {@code subs}. <br>
+   * Denullifies the given object by substituting it with the provided {@code sub} or {@code subs}.
+   *
    * @param t object
    * @param sub first substitute
-   * @param subs array of substitutes
+   * @param subs other substitutes
    * @param <T> type of object
    * @param <S> type of substitutes. Must extend &lt;T&gt;
    * @return the object {@code t} itself if not null, otherwise returns the first non-null
-   * substitute from {@code subs}. <strong>May return null if all substitutes are null.</strong>
+   *         substitute from either {@code sub} or {@code subs}.
+   *         <strong>May return null if all substitutes are null.</strong>
    */
   public static <T, S extends T> T denullify(T t, S sub, S... subs) {
     if (t == null) {
@@ -99,17 +101,17 @@ public class CommonHelper {
   }
 
   /**
-   * Convenience method. Returns default value of {@link Double} if input is null.
+   * Returns default value of {@link Double} (i.e. <code>0.0</code>) if input is null.
    *
    * @param num Double
-   * @return 0.0 if input is null, otherwise returns input
+   * @return <code>0.0</code> if input is null, otherwise returns input
    */
   public static Double denullify(Double num) {
     return num == null ? 0.0 : num;
   }
 
   /**
-   * Convenience method. Returns default value of {@link Integer} if input is null.
+   * Returns default value of {@link Integer} (i.e. 0) if input is null.
    *
    * @param num Integer
    * @return 0 if input is null, otherwise returns input
@@ -119,7 +121,8 @@ public class CommonHelper {
   }
 
   /**
-   * Convenience method. Denullifies {@link List}.
+   * Returns new {@link ArrayList} if input is null.
+   *
    * @param <T> type of the given list
    * @param list List
    * @return new {@link ArrayList} if input is null, otherwise returns input
@@ -129,17 +132,17 @@ public class CommonHelper {
   }
 
   /**
-   * Convenience method. Returns default value of {@link Long} if input is null.
+   * Returns default value of {@link Long} (i.e. <code>0L</code>) if input is null.
    *
    * @param num Long
-   * @return 0 if input is null, otherwise returns input
+   * @return <code>0L</code> if input is null, otherwise returns input
    */
   public static Long denullify(Long num) {
     return num == null ? 0 : num;
   }
 
   /**
-   * Convenience method. Returns empty map if input is null.
+   * Returns empty {@link HashMap} if input is null.
    *
    * @param <K> type of key
    * @param <V> type of value
@@ -151,7 +154,7 @@ public class CommonHelper {
   }
 
   /**
-   * Convenience method. Denullifies {@link Set}.
+   * Returns empty {@link HashSet} if input is null.
    *
    * @param <T> type of the given set
    * @param set Set
@@ -162,7 +165,7 @@ public class CommonHelper {
   }
 
   /**
-   * Convenience method. Returns default value of {@link String} if input is null.
+   * Returns empty {@link String} if input is null.
    *
    * @param str String
    * @return empty String if input is null, otherwise returns str
@@ -172,7 +175,7 @@ public class CommonHelper {
   }
 
   /**
-   * Shortens null object validation before doing an operation on the given object. <br>
+   * Shortens null object validation before doing an operation on that object.<br>
    * Note that this does not validate null sub-objects.
    *
    * @param <T> type of object {@code t}
@@ -195,13 +198,13 @@ public class CommonHelper {
   }
 
   /**
-   * Shortens null object validation before doing an operation on the given object
-   * that returns a value.<br>
-   * Note that this does not validate null sub-objects.<br>
+   * Shortens null object validation before doing a value-returning operation on that object.<br>
+   * Note that this does not validate null sub-objects.<br><br>
    * Also note that the operation cannot return void. For this, use
    * {@link CommonHelper#doIfNotNull(Object, Consumer)}. <br>
-   * <strong>Avoid assigning the returned value to a primitive data type as this method may return null
-   * even if {@code func} returns a primitive data type.</strong>
+   * <strong>Avoid assigning the returned value to a primitive data type variable as this method
+   * may return null when the object <code>t</code> is null, regardless of the return value of
+   * <code>func</code>.
    *
    * @param <T> type of the object {@code t}
    * @param <R> type of return value of {@code func}
@@ -214,7 +217,7 @@ public class CommonHelper {
   }
 
   /**
-   * Syntax sugar. Shortens null validation on a String before doing {@link String#toLowerCase()}
+   * Shortens null validation on a String before invoking {@link String#toLowerCase()}.
    *
    * @param str String
    * @return null if input is null, otherwise returns lower-cased version of the input
@@ -224,7 +227,7 @@ public class CommonHelper {
   }
 
   /**
-   * Syntax sugar. Shortens null validation on a String before doing {@link String#toUpperCase()}
+   * Shortens null validation on a String before invoking {@link String#toUpperCase()}.
    *
    * @param str String
    * @return null if input is null, otherwise returns upper-cased version of the input
