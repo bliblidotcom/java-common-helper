@@ -20,7 +20,6 @@ import org.apache.commons.lang3.StringUtils;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.rmi.server.ExportException;
 import java.util.Date;
 
 import static com.blibli.oss.common.helper.constants.TimeComparator.AFTER;
