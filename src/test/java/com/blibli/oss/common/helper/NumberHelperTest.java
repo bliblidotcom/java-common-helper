@@ -38,6 +38,9 @@ public class NumberHelperTest {
   private static final Double D_ONE = 1.1;
   private static final Double D_TWO = 2.2;
 
+  private static final Integer INT_ONE = 1;
+  private static final Integer INT_TWO = 2;
+
   @Test
   public void is_bigDecimalNullInput_returnsFalse() {
     BigDecimal num1 = null;
@@ -322,6 +325,150 @@ public class NumberHelperTest {
 
     num1 = D_TWO;
     num2 = D_ONE;
+    result = is(num1, Comparator.NEQ, num2);
+    assertTrue(result);
+  }
+
+  @Test
+  public void is_intNullInput_returnsFalse() {
+    Integer num1 = null;
+    Integer num2 = null;
+
+    boolean result = is(num1, Comparator.GT, num2);
+    assertFalse(result);
+
+    result = is(num1, Comparator.EQ, num2);
+    assertTrue(result);
+
+    num1 = INT_ONE;
+    result = is(num1, Comparator.GT, num2);
+    assertFalse(result);
+
+    num1 = null;
+    num2 = INT_TWO;
+    result = is(num1, Comparator.GT, num2);
+    assertFalse(result);
+  }
+
+  @Test
+  public void is_intGT() {
+    Integer num1 = INT_ONE;
+    Integer num2 = INT_TWO;
+    boolean result = is(num1, Comparator.GT, num2);
+    assertFalse(result);
+
+    num1 = INT_ONE;
+    num2 = INT_ONE;
+    result = is(num1, Comparator.GT, num2);
+    assertFalse(result);
+
+    num1 = INT_TWO;
+    num2 = INT_ONE;
+    result = is(num1, Comparator.GT, num2);
+    assertTrue(result);
+  }
+
+  @Test
+  public void is_intGTE() {
+    Integer num1 = INT_ONE;
+    Integer num2 = INT_TWO;
+    boolean result = is(num1, Comparator.GTE, num2);
+    assertFalse(result);
+
+    num1 = INT_ONE;
+    num2 = INT_ONE;
+    result = is(num1, Comparator.GTE, num2);
+    assertTrue(result);
+
+    num1 = INT_TWO;
+    num2 = INT_ONE;
+    result = is(num1, Comparator.GTE, num2);
+    assertTrue(result);
+  }
+
+  @Test
+  public void is_intLT() {
+    Integer num1 = INT_ONE;
+    Integer num2 = INT_TWO;
+    boolean result = is(num1, Comparator.LT, num2);
+    assertTrue(result);
+
+    num1 = INT_ONE;
+    num2 = INT_ONE;
+    result = is(num1, Comparator.LT, num2);
+    assertFalse(result);
+
+    num1 = INT_TWO;
+    num2 = INT_ONE;
+    result = is(num1, Comparator.LT, num2);
+    assertFalse(result);
+  }
+
+  @Test
+  public void is_intLTE() {
+    Integer num1 = INT_ONE;
+    Integer num2 = INT_TWO;
+    boolean result = is(num1, Comparator.LTE, num2);
+    assertTrue(result);
+
+    num1 = INT_ONE;
+    num2 = INT_ONE;
+    result = is(num1, Comparator.LTE, num2);
+    assertTrue(result);
+
+    num1 = INT_TWO;
+    num2 = INT_ONE;
+    result = is(num1, Comparator.LTE, num2);
+    assertFalse(result);
+  }
+
+  @Test
+  public void is_intEQ() {
+    Integer num1 = INT_ONE;
+    Integer num2 = INT_TWO;
+    boolean result = is(num1, Comparator.EQ, num2);
+    assertFalse(result);
+
+    num1 = INT_ONE;
+    num2 = INT_ONE;
+    result = is(num1, Comparator.EQ, num2);
+    assertTrue(result);
+
+    num1 = INT_TWO;
+    num2 = INT_ONE;
+    result = is(num1, Comparator.EQ, num2);
+    assertFalse(result);
+  }
+
+  @Test
+  public void is_intNEQ() {
+    Integer num1 = INT_ONE;
+    Integer num2 = INT_TWO;
+    boolean result = is(num1, Comparator.NEQ, num2);
+    assertTrue(result);
+
+    num1 = INT_ONE;
+    num2 = INT_ONE;
+    result = is(num1, Comparator.NEQ, num2);
+    assertFalse(result);
+
+    num1 = null;
+    num2 = null;
+    result = is(num1, Comparator.NEQ, num2);
+    assertFalse(result);
+
+    num1 = null;
+    num2 = INT_ONE;
+    result = is(num1, Comparator.NEQ, num2);
+    assertTrue(result);
+
+    num1 = INT_ONE;
+    num2 = null;
+    result = is(num1, Comparator.NEQ, num2);
+    assertTrue(result);
+
+    num1 = INT_TWO;
+    num2 = INT_ONE;
     result = is(num1, Comparator.NEQ, num2);
     assertTrue(result);
   }

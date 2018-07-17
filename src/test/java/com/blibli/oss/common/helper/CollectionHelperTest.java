@@ -467,18 +467,25 @@ public class CollectionHelperTest {
   }
 
   @Test
-  public void toSet_properInput_returnsNewHashSetInstance() {
+  public void toSet_properInput_returnsNewModifiableHashSetInstance() {
     Set<String> result = CollectionHelper.toSet("one", null, "two");
     assertNotNull(result);
     assertEquals(2, result.size());
+    assertTrue(result instanceof HashSet);
+
+    result.add("three");
+    assertEquals(3, result.size());
   }
 
   @Test
-  public void toList_properInput_returnsNewArrayListInstance() {
+  public void toList_properInput_returnsNewModifiableArrayListInstance() {
     List<String> result = CollectionHelper.toList("one", null, "two");
     assertNotNull(result);
     assertEquals(2, result.size());
     assertTrue(result instanceof ArrayList);
+
+    result.add("three");
+    assertEquals(3, result.size());
   }
 
   @Test

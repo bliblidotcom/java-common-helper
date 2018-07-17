@@ -55,6 +55,15 @@ public class NumberHelper {
     }
   }
 
+  private static boolean compareNull(Number num1, Comparator cmp, Number num2) {
+    if (Comparator.EQ.equals(cmp) && num1 == null && num2 == null) {
+      return true;
+    } else if (Comparator.NEQ.equals(cmp) && (num1 == null ^ num2 == null)) {
+      return true;
+    }
+    return false;
+  }
+
   /**
    * Evaluates {@code num1} to {@code num2} according to the operand {@code cmp}. <br>
    * For example:
@@ -103,12 +112,30 @@ public class NumberHelper {
    * @return see ref
    */
   public static boolean is(Double num1, Comparator cmp, Double num2) {
+    if (compareNull(num1, cmp, num2)) {
+      return true;
+    } else if (num1 != null && num2 != null) {
+      return compare(cmp, Double.compare(num1, num2));
+    }
+    return false;
+  }
+
+  /**
+   * see ref
+   *
+   * @see NumberHelper#is(BigDecimal, Comparator, BigDecimal)
+   * @param num1 first number
+   * @param cmp of type {@link Comparator}
+   * @param num2 second number
+   * @return see ref
+   */
+  public static boolean is(Integer num1, Comparator cmp, Integer num2) {
     if (Comparator.EQ.equals(cmp) && num1 == null && num2 == null) {
       return true;
     } else if (Comparator.NEQ.equals(cmp) && (num1 == null ^ num2 == null)) {
       return true;
     } else if (num1 != null && num2 != null) {
-      return compare(cmp, Double.compare(num1, num2));
+      return compare(cmp, Integer.compare(num1, num2));
     }
     return false;
   }
