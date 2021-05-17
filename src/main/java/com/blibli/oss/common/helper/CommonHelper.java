@@ -202,7 +202,7 @@ public class CommonHelper {
    * Note that this does not validate null sub-objects.<br><br>
    * Also note that the operation cannot return void. For this, use
    * {@link CommonHelper#doIfNotNull(Object, Consumer)}. <br>
-   * <strong>Avoid assigning the returned value to a primitive data type variable as this method
+   * Avoid assigning the returned value to a primitive data type variable as this method
    * may return null when the object <code>t</code> is null, regardless of the return value of
    * <code>func</code>.
    *
